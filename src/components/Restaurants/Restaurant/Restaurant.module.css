@@ -1,0 +1,8 @@
+.restaurant {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.restaurant__wrapper {
+}
