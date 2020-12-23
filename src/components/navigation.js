@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Navigation(props) {
   return (
-    <div>
+    <>
       {props.restaurants.map((restaurant) => (
         <button
           key={restaurant.id}
@@ -11,6 +11,6 @@ export default function Navigation(props) {
           {restaurant.name}
         </button>
       ))}
-    </div>
+    </>
   );
 }
