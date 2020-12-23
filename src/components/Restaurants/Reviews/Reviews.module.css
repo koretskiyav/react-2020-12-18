@@ -7,9 +7,6 @@
 
 .reviews__item {
   padding-bottom: 20px;
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: space-evenly;*/
 }
 .reviews__text {
   margin-right: 20px;

@@ -6,8 +6,6 @@
 }
 
 .restaurant__wrapper {
-  /*width: auto;*/
-  /*min-width: 300px;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
