@@ -3,14 +3,18 @@ import React from 'react';
 export default function Navigation(props) {
   return (
     <div>
-      {props.restaurants.map((restaurant) => (
-        <button
-          key={restaurant.id}
-          onClick={() => props.onRestaurantClick(restaurant.id)}
-        >
-          {restaurant.name}
-        </button>
-      ))}
+      <div className="row btn-group" role="group">
+        {props.restaurants.map((restaurant) => (
+          <button
+            type="button"
+            className="col-sm-3 btn btn-outline-primary  "
+            key={restaurant.id}
+            onClick={() => props.onRestaurantClick(restaurant.id)}
+          >
+            {restaurant.name}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
