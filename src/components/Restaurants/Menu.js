@@ -1,5 +1,5 @@
 import React from 'react';
-import Product from './product';
+import Product from './Product';
 
 export default function Menu(props) {
   return (
