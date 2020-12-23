@@ -12,12 +12,12 @@ const Restauran = (props) => {
   } = props;
 
   return (
-    <div>
+    <>
       <h2>{name}</h2>
       <Rate reviews={reviews} />
       {activeMenu === SUB_MENU.MENU && <Menu menu={menu} />}
       {activeMenu === SUB_MENU.REVIEWS && <ReviewList reviews={reviews} />}
-    </div>
+    </>
   );
 };
 

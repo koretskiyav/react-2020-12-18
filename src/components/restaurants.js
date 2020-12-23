@@ -30,13 +30,14 @@ export default function Restaurants(props) {
   };
 
   return (
-    <div>
+    <>
       <Navigation
         restaurants={props.restaurants}
         onRestaurantClick={setActiveId}
       />
+      <hr />
       <Submenu handleBtn={handleButtonSubmenu} />
       <Restaurant {...resturanProps} />
-    </div>
+    </>
   );
 }
