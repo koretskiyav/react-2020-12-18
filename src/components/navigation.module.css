@@ -1,0 +1,29 @@
+.navigation {
+  display: flex;
+  border-bottom: 2px solid #aaa;
+}
+button {
+  display: flex;
+  padding: 8px 16px;
+  border: none;
+  border-right: 1px solid #eee;
+  border-radius: 0;
+  cursor: pointer;
+  user-select: none;
+  background: #ddd;
+  transition: background 0.3s;
+}
+button:last-child {
+  border-right: none;
+}
+button:hover {
+  background: #ccc;
+}
+button:active {
+  background: #bbb;
+}
+button.active,
+button.active:hover {
+  cursor: default;
+  background: #aaa;
+}
