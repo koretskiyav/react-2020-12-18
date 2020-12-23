@@ -12,7 +12,7 @@ const Rate = ({ rate }) => {
 
   return (
     <div>
-      <h3>Restaurant rating: {stars}</h3>
+      <h3>Average rating: {stars}</h3>
     </div>
   );
 };
