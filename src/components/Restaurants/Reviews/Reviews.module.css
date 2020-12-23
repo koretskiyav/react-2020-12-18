@@ -1,8 +1,40 @@
 .reviews {
   list-style: none;
-  padding: 0;
+  border: 1px double;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .reviews__item {
   padding-bottom: 20px;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: space-evenly;*/
+}
+.reviews__text {
+  margin-right: 20px;
+}
+
+.reviews__text_bold {
+  font-weight: bold;
+}
+
+.reviews__text_red {
+  color: crimson;
+}
+
+.reviews__text_green {
+  color: green;
+}
+
+.reviews__text_blue {
+  color: darkblue;
+}
+
+.reviews__text_brown {
+  color: brown;
+}
+
+.reviews__text_dark {
+  color: black;
 }
