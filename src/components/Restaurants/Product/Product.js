@@ -1,9 +1,9 @@
 import React from 'react';
-import counter from '../../hocs/Counter';
+import counter from '../../../hocs/Counter';
 // import minus from '../../icons/minus.svg';
-import Plus from '../../icons/plus';
+import Plus from '../../../icons/plus';
 import styles from './Product.module.css';
-import Minus from '../../icons/minus';
+import Minus from '../../../icons/minus';
 
 function Product(props) {
   const { amount, decrement, increment } = props;
