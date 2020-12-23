@@ -1,5 +1,4 @@
 import React from 'react';
-
 import style from './plus.module.css';
 
 export default function Plus() {
