@@ -1,0 +1,8 @@
+.reviews {
+  list-style: none;
+  padding: 0;
+}
+
+.reviews__item {
+  padding-bottom: 20px;
+}
