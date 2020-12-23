@@ -1,0 +1,11 @@
+.rating {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.star {
+  display: inline-block;
+  margin-left: 8px;
+}
+.star:first-child {
+  margin-left: 0;
+}

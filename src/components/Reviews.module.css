@@ -1,0 +1,24 @@
+.reviews {
+  margin-bottom: 16px;
+}
+.review {
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ddd;
+  background: #ccc;
+}
+.title {
+  font-weight: bold;
+  font-size: 20px;
+}
+.text {
+  padding: 16px;
+  font-size: 16px;
+}

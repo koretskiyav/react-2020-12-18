@@ -1,0 +1,37 @@
+.product {
+  margin: 0 8px 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  width: calc(25% - 16px);
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  display: block;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 22px;
+  min-height: 44px;
+  margin: 0 0 16px;
+}
+.price {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+.controls {
+  display: flex;
+  margin-left: auto;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+button {
+  display: inline-block;
+}
+.count {
+  margin: 0 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 500;
+}
