@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from 'react';
 
 import { SUB_MENU } from '../constants';
-import Menu from './menu';
 import Navigation from './navigation';
 import Submenu from './submenu';
-import ReviewList from './reviewlist';
+import Restaurant from './restaurant';
 
 export default function Restaurants(props) {
   const [activeId, setActiveId] = useState(props.restaurants[0].id);
@@ -25,19 +24,19 @@ export default function Restaurants(props) {
     setActiveMenu(menuitem);
   };
 
+  const resturanProps = {
+    activeRestaurant,
+    activeMenu,
+  };
+
   return (
     <div>
       <Navigation
         restaurants={props.restaurants}
         onRestaurantClick={setActiveId}
       />
-
       <Submenu handleBtn={handleButtonSubmenu} />
-
-      {activeMenu === SUB_MENU.MENU && <Menu menu={activeRestaurant.menu} />}
-      {activeMenu === SUB_MENU.REVIEWS && (
-        <ReviewList reviews={activeRestaurant.reviews} />
-      )}
+      <Restaurant {...resturanProps} />
     </div>
   );
 }
