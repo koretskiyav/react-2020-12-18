@@ -1,8 +1,14 @@
 .restaurant {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .restaurant__wrapper {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
 }

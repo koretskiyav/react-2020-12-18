@@ -1,0 +1,33 @@
+.product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product__name {
+  width: 200px;
+}
+
+.product__price {
+  margin-right: 20px;
+}
+
+.product__amount {
+  margin: 0 10px;
+}
+
+.product__button {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.product__button:disabled {
+  /*background-color: #bfb2b2;*/
+}
