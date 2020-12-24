@@ -1,0 +1,7 @@
+.rating {
+  fill: gold;
+}
+.ratesList {
+  display: flex;
+  padding: 0;
+}
