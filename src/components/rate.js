@@ -1,11 +1,12 @@
 import React from 'react';
 
+import RatingStar from '../icons/ratingStar';
+
 export default function Rate(props) {
   return (
     <div>
-      {props.reviews.map((review) => (
-        <p key={review.id}>{review.rating}</p>
-      ))}
+      {props.review.rating}
+      <RatingStar />
     </div>
   );
 }
