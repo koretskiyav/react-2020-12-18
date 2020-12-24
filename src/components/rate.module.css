@@ -1,0 +1,69 @@
+.rate {
+  position: relative;
+  white-space: nowrap;
+  box-sizing: border-box;
+  width: max-content;
+  padding: .5rem 0;
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rate[data-rating]::before {
+  content: attr(data-rating);
+  display: inline-block;
+  margin-right: .5em;
+}
+
+.rate[data-voters]::after {
+  content: '(' attr(data-voters) ')';
+  display: inline-block;
+  font-weight: 300;
+  font-size: .75em;
+}
+
+.rate:not([data-rating])::after {
+  content: '(no ratings yet)';
+  display: inline-block;
+  font-weight: 300;
+  font-size: .75em;
+  font-style: italic;
+}
+
+.stars {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: .5em;
+  box-sizing: border-box;
+  order: -1;
+}
+
+.range {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.stars::before,
+.range::before {
+  /* content: "★ ★ ★ ★ ★"; */
+  content: "\2605\00a0\2605\00a0\2605\00a0\2605\00a0\2605";
+  display: block;
+  top: 0;
+  left: 0;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.stars::before {
+  color: #d7d7d7;
+}
+
+.range::before {
+  color: #ff8000;
+  position: absolute;
+}
