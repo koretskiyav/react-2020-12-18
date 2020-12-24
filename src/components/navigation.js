@@ -1,4 +1,5 @@
 import React from 'react';
+import Rate from './rate';
 
 export default function Navigation(props) {
   return (
