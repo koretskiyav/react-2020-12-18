@@ -18,13 +18,16 @@ const Restaurant = ({ restaurant }) => {
   const rating = ratingHandler();
 
   return (
-    <div className={styles.restaurant}>
-      <Menu menu={restaurant.menu} />
-      <div className={styles.restaurant__wrapper}>
-        <Reviews reviews={restaurant.reviews} />
-        <Rate rate={rating} />
+    <>
+      <h1 className={styles.restaurant__title}>{restaurant.name}</h1>
+      <div className={styles.restaurant}>
+        <Menu menu={restaurant.menu} />
+        <div className={styles.restaurant__wrapper}>
+          <Reviews reviews={restaurant.reviews} />
+          <Rate rate={rating} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
