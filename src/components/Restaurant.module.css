@@ -1,0 +1,13 @@
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 16px 0 32px;
+}
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  margin-right: 16px;
+}
+.rating {
+  font-size: 24px;
+}
