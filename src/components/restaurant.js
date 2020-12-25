@@ -4,11 +4,14 @@ import Menu from './menu';
 import Reviews from './reviews';
 
 export default function Restaurant(props) {
-  // const reduce = props.reduce((accumulator, current) => {
-  //   return accumulator + current;
-  // }, 0);
-
-  // const average = reduce / props.reviews.length;
+  const ratingSum = props.restaurant.reviews.reduce(
+    (accumulator, currentReview) => {
+      return accumulator + currentReview.rating;
+    },
+    0
+  );
+  const reviewsQTY = props.restaurant.reviews.length;
+  const averageRating = (ratingSum / reviewsQTY).toFixed(0);
 
   return (
     <div>
@@ -20,7 +23,9 @@ export default function Restaurant(props) {
         <p>
           <b>Average rating</b>
         </p>
-        {/* <Rate reviews={props.restaurant.reviews} /> */}
+        <div>
+          <Rate review={averageRating} />
+        </div>
         <Reviews reviews={props.restaurant.reviews} />
       </div>
     </div>
