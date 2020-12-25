@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './Navigation.module.css';
 
 export default function Navigation(props) {
   return (
-    <div>
+    <div className={styles.navigation}>
       {props.restaurants.map((restaurant) => (
         <button
           key={restaurant.id}

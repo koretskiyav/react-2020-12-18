@@ -1,0 +1,20 @@
+.restaurant {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.restaurant__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.restaurant__title {
+  font-size: 1.5em;
+  text-align: center;
+  text-transform: uppercase;
+}
