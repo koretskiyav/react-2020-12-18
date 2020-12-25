@@ -1,9 +1,10 @@
 import React from 'react';
 import Product from './product';
+import style from '../styles/menu.module.css';
 
 export default function Menu(props) {
   return (
-    <div>
+    <div className={style.menu}>
       {props.menu.map((product) => (
         <Product key={product.id} product={product} />
       ))}

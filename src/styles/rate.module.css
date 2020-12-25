@@ -1,0 +1,10 @@
+.rate {
+  display: flex;
+  align-items: center;
+
+  font-weight: 600;
+}
+
+.ratingIcon {
+  height: 28px;
+}
