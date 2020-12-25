@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Review from './review';
 import styles from './reviews.module.css';
 
@@ -10,6 +12,14 @@ const Reviews = ({ reviews }) => {
       ))}
     </div>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default Reviews;
