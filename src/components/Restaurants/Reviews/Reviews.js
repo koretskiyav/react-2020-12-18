@@ -1,25 +1,9 @@
 import React from 'react';
 import styles from './Reviews.module.css';
+import Rating from '../../Rating/Rating';
 
 const Reviews = ({ reviews }) => {
   let restaurantReviews = reviews.map(({ id, user, text, rating }) => {
-    let score;
-    switch (rating) {
-      case 2:
-        score = styles.reviews__text_brown;
-        break;
-      case 3:
-        score = styles.reviews__text_blue;
-        break;
-      case 4:
-        score = styles.reviews__text_green;
-        break;
-      case 5:
-        score = styles.reviews__text_red;
-        break;
-      default:
-        score = styles.reviews__text_dark;
-    }
     return (
       <li key={id} className={styles.reviews__item}>
         <span
@@ -30,15 +14,7 @@ const Reviews = ({ reviews }) => {
           {user}:
         </span>
         <span className={styles.reviews__text}>{text}</span>
-        <span
-          className={[
-            styles.reviews__text,
-            score,
-            styles.reviews__text_bold,
-          ].join(' ')}
-        >
-          {rating}
-        </span>
+        <Rating rating={rating} />
       </li>
     );
   });
