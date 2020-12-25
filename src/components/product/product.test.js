@@ -1,9 +1,4 @@
-import Enzyme, { mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Product from './product';
-import { restaurants } from '../../fixtures';
-Enzyme.configure({ adapter: new Adapter() });
-
 const product = restaurants[0].menu[0];
 
 describe('Product', () => {
