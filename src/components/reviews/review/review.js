@@ -17,4 +17,8 @@ const Review = ({ user, text, rating }) => (
   </div>
 );
 
+Review.defaultProps = {
+  user: 'Anonymous',
+};
+
 export default Review;
