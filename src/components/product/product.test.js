@@ -15,9 +15,24 @@ describe('Product', () => {
     const wrapper = mount(<Product product={product} />);
     expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
   });
+  it('should init from 3 amount', () => {
+    const wrapper = mount(<Product product={product} amount={3} />);
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('3');
+  });
   it('should increment amount', () => {
     const wrapper = mount(<Product product={product} />);
     wrapper.find('[data-id="product-increment"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('1');
+  });
+  it('should decrement amount', () => {
+    const wrapper = mount(<Product product={product} />);
+    wrapper.find('[data-id="product-increment"]').simulate('click');
+    wrapper.find('[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
+  it('should decrement amount (from amount={2})', () => {
+    const wrapper = mount(<Product product={product} amount={2} />);
+    wrapper.find('[data-id="product-decrement"]').simulate('click');
     expect(wrapper.find('[data-id="product-amount"]').text()).toBe('1');
   });
   it('should fetch data', () => {
