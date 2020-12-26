@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Rate from './rate';
 import Menu from './menu';
 import Reviews from './reviews';
 
 export default function Restaurant(props) {
-  const ratingSum = props.restaurant.reviews.reduce(
-    (accumulator, currentReview) => {
-      return accumulator + currentReview.rating;
-    },
-    0
-  );
-  const reviewsQTY = props.restaurant.reviews.length;
-  const averageRating = (ratingSum / reviewsQTY).toFixed(0);
+  const ratingSum = useMemo(() => {
+    const total = props.restaurant.reviews.reduce(
+      (accumulator, currentReview) => {
+        return accumulator + currentReview.rating;
+      },
+      0
+    );
+    return (total / props.restaurant.reviews.length).toFixed(0);
+  }, [props.restaurant.reviews]);
 
   return (
     <div>
@@ -24,7 +25,7 @@ export default function Restaurant(props) {
           <b>Average rating</b>
         </p>
         <div>
-          <Rate review={averageRating} />
+          <Rate review={ratingSum} />
         </div>
         <Reviews reviews={props.restaurant.reviews} />
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from './ratingStar.module.css';
 
-export default function Plus() {
+export default function RatingStar() {
   return (
     <svg
       fill="none"
