@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Restaurants from '../restaurants';
 import Header from '../header';
 
@@ -12,3 +13,8 @@ export default class App extends PureComponent {
     );
   }
 }
+
+App.propTypes = {
+  restaurants: PropTypes.array.isRequired
+  // ??? PropTypes.any.isRequired
+};

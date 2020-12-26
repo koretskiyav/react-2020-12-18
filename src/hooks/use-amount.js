@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function useAmount(initialAmount) {
   const [amount, setAmount] = useState(initialAmount);
@@ -6,4 +7,8 @@ export default function useAmount(initialAmount) {
   const increment = () => setAmount(amount + 1);
 
   return { amount, decrement, increment };
+}
+
+useAmount.propTypes = {
+  initialAmount: PropTypes.number,
 }
