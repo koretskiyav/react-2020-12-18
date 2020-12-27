@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Review from './review';
 import PropTypes from 'prop-types';
 
 import styles from './reviews.module.css';
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ reviews, fetchData }) => {
+  //just for test.
+  useEffect(() => {
+    fetchData && fetchData(reviews[0].id);
+  }, []); // eslint-disable-line
   return (
-    <div className={styles.reviews}>
+    <div data-id="reviewBox" className={styles.reviews}>
       {reviews.map((review) => (
-        <Review key={review.id} {...review} />
+        <Review data-id="review-child" key={review.id} {...review} />
       ))}
     </div>
   );
