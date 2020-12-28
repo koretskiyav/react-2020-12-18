@@ -1,0 +1,29 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 60px;
+}
+
+.menu > * {
+  padding: 12px 0;
+}
+
+@media all and (min-width: 768px) {
+  .menu {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .menu > *:first-child {
+    flex: 1 0 calc(100% - 400px - 2 * 24px);
+  }
+
+  .menu > *:last-child {
+    flex: 1 0 calc(400px - 24px);
+  }
+
+  .menu > * {
+    padding: 0 12px;
+  }
+}

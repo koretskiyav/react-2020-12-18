@@ -1,0 +1,13 @@
+.list {
+  height: auto;
+  text-align: center;
+  padding: 6px;
+}
+
+.list span {
+  cursor: pointer;
+}
+
+.restaurant {
+  padding: 6px 12px;
+}
