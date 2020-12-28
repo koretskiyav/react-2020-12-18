@@ -15,7 +15,6 @@ describe('Reviews', () => {
     const reviewNumbers = reviews.length;
     expect(wrapper.find('[data-id="review"]').length).toBe(reviewNumbers);
   });
-
   describe('Review', () => {
     it('should render', () => {
       const wrapper = mount(<Review {...review} />);
