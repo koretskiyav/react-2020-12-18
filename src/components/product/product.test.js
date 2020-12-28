@@ -25,4 +25,17 @@ describe('Product', () => {
     mount(<Product product={product} fetchData={fn} />);
     expect(fn).toBeCalledWith(product.id);
   });
+
+  it('should decrement amount', () => {
+    const wrapper = mount(<Product product={product} />);
+    // Если amount равен нулю присваиваем результат после одного клика равным 0, если amount отличается от нуля то результат будет value - 1
+    let result =
+      wrapper.find('[data-id="product-amount"]').text() === '0'
+        ? 0
+        : wrapper.find('[data-id="product-amount"]').text() - 1;
+    wrapper.find('[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe(
+      String(result)
+    );
+  });
 });
