@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-
+import PropTypes from 'prop-types';
 import styles from './star.module.css';
 
 const Star = ({ checked }) => (
@@ -16,4 +16,7 @@ const Star = ({ checked }) => (
   </svg>
 );
 
+Star.propTypes = {
+  checked: PropTypes.bool.isRequired,
+};
 export default Star;
