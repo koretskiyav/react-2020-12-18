@@ -10,11 +10,11 @@ const estimatedReviewsAmount = reviews.length;
 describe('Reviews', () => {
   it('should render', () => {
     const wrapper = mount(<Reviews reviews={reviews} />);
-    expect(wrapper.find('[data-id="reviews"]').length).toBe(1);
+    expect(wrapper.find('.reviews').length).toBe(1);
   });
   it('should have review blocks', function () {
     const wrapper = mount(<Reviews reviews={reviews} />);
-    expect(wrapper.find('[data-id="reviews"]').children().length).toBe(
+    expect(wrapper.find('.reviews').children().length).toBe(
       estimatedReviewsAmount
     );
   });
