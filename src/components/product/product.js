@@ -45,13 +45,15 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
 
 Product.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    name: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  fetchData: PropTypes.func,
+  // from HOC counter
   amount: PropTypes.number,
-  increment: PropTypes.func,
   decrement: PropTypes.func,
+  increment: PropTypes.func,
 };
 
 export default counter(Product);
