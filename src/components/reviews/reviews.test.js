@@ -6,11 +6,29 @@ import Review from './review';
 import { restaurants } from '../../fixtures';
 Enzyme.configure({ adapter: new Adapter() });
 
-const reviews = restaurants[0].reviews;
+describe('Reviews testing', () => {
+  const reviewsOfFirstRestaurant = restaurants[0].reviews;
+  const reviewsOfSecondRestaurant = restaurants[1].reviews;
 
-describe('Reviews', () => {
-  it('should render something', () => {
-    const wrapper = mount(<Reviews reviews={reviews} />);
-    expect(wrapper.isEmptyRender()).toBe(false);
+  describe('Reviews of first restaurant', () => {
+    const wrapper = mount(<Reviews reviews={reviewsOfFirstRestaurant} />);
+
+    it('should render something', () => {
+      expect(wrapper.isEmptyRender()).toBe(false);
+    });
+    it('should have correct QTY of reviews', () => {
+      expect(wrapper.find('Review')).toHaveLength(2);
+    });
+  });
+
+  describe('Reviews of second restaurant', () => {
+    const wrapper = mount(<Reviews reviews={reviewsOfSecondRestaurant} />);
+
+    it('should render something', () => {
+      expect(wrapper.isEmptyRender()).toBe(false);
+    });
+    it('should have correct QTY of reviews', () => {
+      expect(wrapper.find('Review')).toHaveLength(3);
+    });
   });
 });
