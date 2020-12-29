@@ -10,7 +10,7 @@ const review = restaurants[0].reviews[0];
 describe('Review', () => {
   it('should render', () => {
     const wrapper = mount(<Review {...review} />);
-    expect(wrapper.find('.review').length).toBe(1);
+    expect(wrapper.find('Review')).toHaveLength(1);
   });
   it('should render user name', () => {
     const wrapper = mount(<Review {...review} />);
