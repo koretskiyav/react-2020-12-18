@@ -1,0 +1,62 @@
+/* default settings:
+
+--count-width: 100%;
+--counter-size: 2.25rem;
+--count-order: 1;
+
+*/
+
+.counter {
+  text-align: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-end;
+}
+
+.count {
+  color: var(--grey-dark);
+  font-weight: 600;
+  font-size: 18px;
+  width: var(--count-width, 100%);
+  height: var(--counter-size, 2.25rem);
+  max-width: calc(var(--counter-size, 2.25rem)*2 + 4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: var(--count-order, 1);
+}
+
+.button {
+  box-sizing: border-box;
+  color: var(--white);
+  background-color: var(--yellow);
+  border: 1px solid var(--yellow);
+  border-radius: 2px;
+  width: var(--counter-size, 2.25rem);
+  height: var(--counter-size, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 700;
+  font-size: calc(var(--counter-size, 2.25rem)*.75);
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 1px;
+  order: 2;
+}
+
+.button + .button {
+  order: 4;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  border-color: var(--yellow-light);
+  background-color: var(--yellow-light);
+}
