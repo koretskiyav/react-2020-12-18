@@ -10,7 +10,7 @@ class Reviews extends Component {
         <h3 className="reviews__title">Reviews:</h3>
         {this.props.reviews.map((review) => {
           return (
-            <div className="reviews__review review">
+            <div className="reviews__review review" key={review.id}>
               <div className="review__author">{review.user}</div>
               <div className="review__rating">
                 <Rate rating={review.rating} />
