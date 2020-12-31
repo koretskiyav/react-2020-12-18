@@ -1,0 +1,24 @@
+.container {
+  padding: 20px 26px;
+  margin-bottom: 12px;
+  border: 1px solid var(--grey);
+  background-color: var(--white);
+  color: var(--black);
+  text-decoration: none;
+  outline: none;
+  transition: 0.2s all;
+}
+
+.total {
+  text-align: right;
+  padding-right: 2.5rem;
+  font-size: 18px;
+  line-height: 48px;
+  background-color: var(--yellow-light);
+}
+
+.sum {
+  font-weight: 900;
+  display: inline-block;
+  width: 5rem;
+}
