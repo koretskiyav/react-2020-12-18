@@ -164,5 +164,4 @@ const restaurants = [
     ],
   },
 ];
-
 export { restaurants };
