@@ -13,7 +13,9 @@ export default (state = 0, action) => {
         return { ...state, [payload.id]: 0 };
       }
     case CLEAR_POSITION:
-      return { ...state, [payload.id]: 0 };
+      const newState = { ...state };
+      delete newState[payload.id];
+      return newState;
 
     default:
       return state;
