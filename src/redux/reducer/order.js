@@ -1,7 +1,7 @@
 import { DECREMENT, INCREMENT } from '../constants';
 
 // { [productId]: amount }
-export default (state = 0, action) => {
+export default (state = {}, action) => {
   const { type, payload } = action;
   switch (type) {
     case INCREMENT:
