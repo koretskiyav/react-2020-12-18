@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
@@ -20,4 +21,6 @@ Restaurants.propTypes = {
   ).isRequired,
 };
 
-export default Restaurants;
+export default connect((state) => ({
+  restaurants: state.restaurants,
+}))(Restaurants);
