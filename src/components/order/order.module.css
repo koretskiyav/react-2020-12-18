@@ -1,0 +1,35 @@
+.orderBox {
+  color: var(--white);
+  background-color: var(--yellow);
+  /* border: 1px solid var(--white); */
+  border-radius: 2px;
+  /* position: sticky; */
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+}
+
+.orderBox > * {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  /* width: 50%; */
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.basket {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderedProducts {
+  list-style-type: decimal;
+}
