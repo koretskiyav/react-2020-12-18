@@ -1,0 +1,113 @@
+.product {
+  padding: 16px 32px;
+  background: rgba(240, 173, 78, 0.1);
+  margin-bottom: 8px;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.productName {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.productPrice {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--yellow);
+}
+
+.productControls {
+  padding: 5px 0;
+  text-align: center;
+  display: inline-block;
+}
+
+.productCount {
+  color: var(--grey-dark);
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+}
+
+.button {
+  color: var(--white);
+  background-color: var(--yellow);
+  border: 1px solid var(--yellow);
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 700;
+  font-size: 24px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin: 0 1px;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  border-color: var(--yellow-light);
+  background-color: var(--yellow-light);
+}
+
+.buttonRemove {
+  color: var(--white);
+  background-color: rgba(255, 0, 0, 0.6);
+  border: 1px solid rgba(255, 0, 0, 0.6);
+  border-radius: 2px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 700;
+  font-size: 24px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin: 0 1px;
+}
+
+.buttonRemove:hover,
+.buttonRemove:focus,
+.buttonRemove:active {
+  border-color: rgba(255, 0, 0, 0.4);
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+.footer {
+  padding-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.productSumPrice {
+  font-size: 20px;
+}
