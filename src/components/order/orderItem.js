@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from './orderItem.module.css';
+import { connect } from 'react-redux';
+import { decrement, increment, remove } from '../../redux/actions';
+import PropTypes from 'prop-types';
 
 const OrderItem = ({ product, amount, increment, decrement, remove }) => {
   return (
@@ -18,9 +21,16 @@ const OrderItem = ({ product, amount, increment, decrement, remove }) => {
           </div>
           <button onClick={remove}>&#215;</button>
         </div>
+        <h2>Price?</h2>
       </div>
     </div>
   );
 };
 
-export default OrderItem;
+const mapDispatchToProps = (dispatch, product) => ({
+  increment: () => dispatch(increment(product)),
+  decrement: () => dispatch(decrement(product)),
+  remove: () => dispatch(remove(product)),
+});
+
+export default connect(null, mapDispatchToProps)(OrderItem);
