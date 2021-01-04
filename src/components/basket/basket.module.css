@@ -1,0 +1,18 @@
+.basket {
+  padding: 32px;
+  border-top: 1px solid var(--black);
+  border-bottom: 1px solid var(--black);
+}
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.totalPrice {
+  margin-top: 16px;
+  padding: 0 32px;
+  font-weight: 300;
+  font-size: 24px;
+}
+.totalPrice span {
+  font-weight: 500;
+}
