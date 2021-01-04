@@ -9,7 +9,6 @@ export default (state = {}, action) => {
     case DECREMENT:
       return { ...state, [payload.id]: (state[payload.id] || 0) - 1 };
     case CLEAR:
-      console.log('clear');
       return {};
     default:
       return state;

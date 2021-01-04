@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { clear, increment, decrement } from '../../redux/actions';
 import MinusIcon from './icons/minus.svg';
 import PlusIcon from './icons/plus.svg';
+import popup from '../../hocs/popup';
 
 import styles from './basket.module.css';
 
@@ -13,13 +14,17 @@ const Basket = ({
   clearBasket,
   increment,
   decrement,
+  isOpenBasket,
+  hideBasket,
+  openBasket,
 }) => {
-  const [isOpenBasket, toggleBasket] = useState(false);
-  const hideBasket = () => toggleBasket(false);
-  const openBasket = () => toggleBasket(true);
   const products = useMemo(() => {
     return restaurants.flatMap(({ menu }) => menu);
   }, [restaurants]);
+
+  const getCountProduct = (productId) => {
+    return order[productId] || 0;
+  };
 
   return (
     <div className={styles.basket}>
@@ -36,8 +41,10 @@ const Basket = ({
             <div key={product.id} className={styles.product}>
               {product.name}
               <div>Price {product.price} $ </div>
-              <div> Count {order[product.id] || 0}</div>
-              <div>Total coast {order[product.id] * product.price || 0}</div>
+              <div>Count {getCountProduct(product.id)}</div>
+              <div>
+                Total coast {getCountProduct(product.id) * product.price}
+              </div>
               <div className={styles.buttons}>
                 <button
                   className={styles.button}
@@ -74,6 +81,9 @@ Basket.propTypes = {
   clearBasket: PropTypes.func.isRequired,
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
+  hideBasket: PropTypes.func.isRequired,
+  openBasket: PropTypes.func.isRequired,
+  isOpenBasket: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -86,4 +96,4 @@ const mapDispatchToProps = (dispatch) => ({
   decrement: (productId) => dispatch(decrement(productId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Basket);
+export default connect(mapStateToProps, mapDispatchToProps)(popup(Basket));
