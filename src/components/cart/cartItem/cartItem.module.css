@@ -1,0 +1,9 @@
+.cartItem {
+    padding: 5px 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+}

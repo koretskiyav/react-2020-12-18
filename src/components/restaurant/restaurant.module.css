@@ -1,3 +1,13 @@
 .restaurant {
   padding: 12px;
+  display: flex;
+  flex-direction: row;
+}
+
+.restaurant > *:first-child {
+  flex: 1 0 70%;
+}
+
+.restaurant > *:last-child {
+  flex: 1 0 30%;
 }
