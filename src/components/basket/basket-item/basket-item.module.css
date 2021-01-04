@@ -1,0 +1,75 @@
+.basketItem {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.basketItem > * {
+  flex: 1 0 50%;
+}
+
+.basketItem > *:last-child {
+  text-align: right;
+}
+
+.basketItem p {
+  margin-bottom: 0;
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+}
+
+.count {
+  color: var(--black);
+}
+
+.basketItem .price {
+  width: 80px;
+  text-align: right;
+  display: inline-block;
+  margin-top: -1px;
+}
+
+.count:not(:last-child) {
+  margin: 0 3px;
+}
+
+.button {
+  display: inline-block;
+  padding: 0;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.button > img {
+  vertical-align: bottom;
+}
+
+.name,
+.name span {
+  color: var(--black);
+  line-height: 1.2;
+  font-size: 14px;
+}
+
+.name > a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.name p,
+.info p:first-child {
+  font-weight: bold;
+}
