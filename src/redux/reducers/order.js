@@ -7,12 +7,12 @@ export default (state = 0, action) => {
     case INCREMENT:
       return { ...state, [payload.id]: (state[payload.id] || 0) + 1 };
     case DECREMENT:
-      return {
-        ...state,
-        [payload.id]: state[payload.id] > 0 ? state[payload.id] - 1 : 0,
-      };
+      const newAmount = state[payload.id] > 0 ? state[payload.id] - 1 : 0;
+      if (newAmount !== 0) return { ...state, [payload.id]: newAmount };
     case REMOVE:
-      return { ...state, [payload.id]: null };
+      delete state[payload.id];
+
+      return { ...state };
     default:
       return state;
   }

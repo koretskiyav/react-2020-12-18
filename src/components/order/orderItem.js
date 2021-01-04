@@ -1,17 +1,23 @@
 import React from 'react';
-import styles from './order.module.css';
-import { connect } from 'react-redux';
-import { increment, decrement, remove } from '../../redux/actions';
+import styles from './orderItem.module.css';
 
 const OrderItem = ({ product, amount, increment, decrement, remove }) => {
   return (
-    <div className={styles.count} data-id="product-amount">
-      <h2>{product}</h2>
-      <h2>{amount}</h2>
-      <div className="buttons">
-        <button onClick={increment}>+</button>
-        <button onClick={decrement}>-</button>
-        <button onClick={remove}>&#215;</button>
+    <div className={styles.orderItem} data-id="product-amount">
+      <div className={styles.basket}>
+        <h2>{product}</h2>
+        <div className={styles.basket}>
+          <div>
+            <button onClick={increment}>+</button>
+          </div>
+          <div>
+            <h2>{amount}</h2>
+          </div>
+          <div>
+            <button onClick={decrement}>-</button>
+          </div>
+          <button onClick={remove}>&#215;</button>
+        </div>
       </div>
     </div>
   );

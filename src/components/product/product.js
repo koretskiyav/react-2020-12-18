@@ -70,8 +70,22 @@ const mapStateToProps = (state, ownProps) => ({
 // };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  increment: () => dispatch(increment(ownProps.product.id)),
-  decrement: () => dispatch(decrement(ownProps.product.id)),
+  increment: () =>
+    dispatch(
+      increment(
+        ownProps.product.id,
+        ownProps.product.name,
+        ownProps.product.price
+      )
+    ),
+  decrement: () =>
+    dispatch(
+      decrement(
+        ownProps.product.id,
+        ownProps.product.name,
+        ownProps.product.price
+      )
+    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

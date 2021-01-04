@@ -12,24 +12,36 @@ const Order = ({ products, increment, decrement, remove }) => {
 
   for (const product of Object.entries(products)) {
     orderedProducts.push(
-      <OrderItem
-        key={product[0]}
-        product={product[0]}
-        amount={product[1]}
-        increment={increment}
-        decrement={decrement}
-        remove={remove}
-      />
+      <li>
+        <OrderItem
+          key={product[0]}
+          product={product[0]}
+          amount={product[1]}
+          increment={increment}
+          decrement={decrement}
+          remove={remove}
+        />
+      </li>
     );
   }
 
   const nodes = hasProducts ? (
     <div>
-      &nbsp;Total order:
-      <div>{[...orderedProducts]}</div>
+      <div>
+        <h2>~ Total order ~</h2>
+        <hr />
+      </div>
+      <div>
+        <ol className={styles.orderedProducts}>{[...orderedProducts]}</ol>
+      </div>
     </div>
   ) : (
-    <em>Please add some products to cart.</em>
+    <div className={styles.basket}>
+      <div>
+        <Basket />
+      </div>
+      <em>&nbsp;Please add some products to cart :)</em>
+    </div>
   );
 
   return <div className={styles.orderBox}>{nodes}</div>;
