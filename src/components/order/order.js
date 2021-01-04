@@ -1,26 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styles from './order.module.css';
-import { increment, decrement } from '../../redux/actions';
+import { increment, decrement, remove } from '../../redux/actions';
 import Basket from './basket/basket';
+import OrderItem from './orderItem';
 
-const Order = ({ product, amount, increment, decrement }) => {
-  return (
-    <div className={styles.orderBox}>
-      <div>
-        <Basket />
-        &nbsp;Total order:
-      </div>
+const Order = ({ products, increment, decrement, remove }) => {
+  const hasProducts = Object.keys(products).length > 0;
+
+  const orderedProducts = [];
+
+  for (const product of Object.entries(products)) {
+    orderedProducts.push(
+      <OrderItem
+        key={product[0]}
+        product={product[0]}
+        amount={product[1]}
+        increment={increment}
+        decrement={decrement}
+        remove={remove}
+      />
+    );
+  }
+
+  const nodes = hasProducts ? (
+    <div>
+      &nbsp;Total order:
+      <div>{[...orderedProducts]}</div>
     </div>
+  ) : (
+    <em>Please add some products to cart.</em>
   );
+
+  return <div className={styles.orderBox}>{nodes}</div>;
 };
 
-// Order.propTypes = {};
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  increment: () => dispatch(increment(ownProps.product.id)),
-  decrement: () => dispatch(decrement(ownProps.product.id)),
+const mapStateToProps = (state) => ({
+  products: state.order,
 });
 
-export default connect(mapDispatchToProps)(Order);
+const mapDispatchToProps = (dispatch, product) => ({
+  increment: () => dispatch(increment(product[0])),
+  decrement: () => dispatch(decrement(product[0])),
+  remove: () => dispatch(remove(product[0])),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order);

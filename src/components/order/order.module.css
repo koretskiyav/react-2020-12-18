@@ -1,19 +1,19 @@
 .orderBox {
   color: var(--white);
   background-color: var(--yellow);
-  border: 1px solid var(--white);
+  /* border: 1px solid var(--white); */
   border-radius: 2px;
-  height: 50px;
-  position: sticky;
+  /* position: sticky; */
   top: 0px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   z-index: 3;
 }
 
 .orderBox > * {
-  width: 100px;
-  flex: 10 0;
+  width: 50%;
+  min-height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
