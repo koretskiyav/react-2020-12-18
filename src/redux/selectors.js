@@ -1,11 +1,8 @@
 import { createSelector } from 'reselect';
 
-const restaurantsSelector = (state) => state.restaurants;
+// const restaurantsSelector = (state) => state.restaurants;
 const orderSelector = (state) => state.order;
-
-const productsSelector = createSelector(restaurantsSelector, (restaurants) =>
-  restaurants.flatMap((restaurant) => restaurant.menu)
-);
+const productsSelector = (state) => state.products;
 
 export const orderProductsSelector = createSelector(
   productsSelector,

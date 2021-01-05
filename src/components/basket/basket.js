@@ -8,8 +8,6 @@ import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 
 function Basket({ title = 'Basket', total, orderProducts }) {
-  console.log('render Basket');
-
   if (!total) {
     return (
       <div className={styles.basket}>
@@ -46,8 +44,6 @@ function Basket({ title = 'Basket', total, orderProducts }) {
 }
 
 export default connect((state) => {
-  console.log('connect');
-
   return {
     total: totalSelector(state),
     orderProducts: orderProductsSelector(state),
