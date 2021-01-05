@@ -10,7 +10,7 @@ export const orderProductsSelector = createSelector(
   (products, order) =>
     Object.keys(order)
       .filter((productId) => order[productId] > 0)
-      .map((productId) => products.find((product) => product.id === productId))
+      .map((productId) => products[productId])
       .map((product) => ({
         product,
         amount: order[product.id],

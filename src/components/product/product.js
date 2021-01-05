@@ -51,7 +51,7 @@ Product.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   amount: state.order[ownProps.id] || 0,
-  product: state.products.find((product) => product.id === ownProps.id),
+  product: state.products[ownProps.id],
 });
 
 // const mapDispatchToProps = {
