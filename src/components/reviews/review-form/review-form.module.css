@@ -1,0 +1,69 @@
+.reviewForm {
+  border: 1px solid var(--grey);
+  background-color: var(--white);
+  color: var(--black);
+  transition: 0.2s all;
+  position: relative;
+  margin-bottom: 0;
+  padding: 20px 26px;
+}
+
+.reviewFormItem {
+  margin-bottom: 5px;
+}
+
+.rateWrap {
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+  white-space: nowrap;
+}
+
+.rateWrap > span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.rateWrap > span:first-child {
+  margin-right: 8px;
+}
+
+.addReviewTitle {
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.message {
+  max-width: 70%;
+  width: 100%;
+}
+
+.publish {
+  margin-top: 16px;
+  max-width: 320px;
+}
+
+.submitButton:hover {
+  border-color: var(--yellow-light);
+  opacity: 0.8;
+}
+
+@media all and (max-width: 767px) {
+  .message {
+    max-width: none;
+  }
+
+  .reviewForm {
+    margin-bottom: 60px;
+    padding: 12px 16px;
+  }
+
+  .addReviewTitle {
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+}

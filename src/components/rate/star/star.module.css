@@ -5,3 +5,7 @@
 .checked {
   fill: var(--yellow);
 }
+
+.clickable {
+  cursor: pointer;
+}
