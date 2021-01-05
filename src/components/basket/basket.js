@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { clear, increment, decrement } from '../../redux/actions';
@@ -22,6 +22,9 @@ const Basket = ({
     return restaurants.flatMap(({ menu }) => menu);
   }, [restaurants]);
 
+  const selectedProducts =
+    products.filter((product) => order[product.id]) || [];
+
   const getCountProduct = (productId) => {
     return order[productId] || 0;
   };
@@ -35,43 +38,46 @@ const Basket = ({
       >
         ≡
       </button>
-      {isOpenBasket && (
-        <div className={styles.products}>
-          {products.map((product) => (
-            <div key={product.id} className={styles.product}>
-              {product.name}
-              <div>Price {product.price} $ </div>
-              <div>Count {getCountProduct(product.id)}</div>
-              <div>
-                Total coast {getCountProduct(product.id) * product.price}
+      {isOpenBasket &&
+        (selectedProducts.length ? (
+          <div className={styles.products}>
+            {selectedProducts.map((product) => (
+              <div key={product.id} className={styles.product}>
+                {product.name}
+                <div>Price {product.price} $ </div>
+                <div>Count {getCountProduct(product.id)}</div>
+                <div>
+                  Total coast {getCountProduct(product.id) * product.price}
+                </div>
+                <div className={styles.buttons}>
+                  <button
+                    className={styles.button}
+                    onClick={() => decrement(product.id)}
+                    data-id="product-decrement"
+                  >
+                    <img src={MinusIcon} alt="minus" />
+                  </button>
+                  <button
+                    className={styles.button}
+                    onClick={() => increment(product.id)}
+                    data-id="product-increment"
+                  >
+                    <img src={PlusIcon} alt="plus" />
+                  </button>
+                </div>
               </div>
-              <div className={styles.buttons}>
-                <button
-                  className={styles.button}
-                  onClick={() => decrement(product.id)}
-                  data-id="product-decrement"
-                >
-                  <img src={MinusIcon} alt="minus" />
-                </button>
-                <button
-                  className={styles.button}
-                  onClick={() => increment(product.id)}
-                  data-id="product-increment"
-                >
-                  <img src={PlusIcon} alt="plus" />
-                </button>
-              </div>
-            </div>
-          ))}
-          <button
-            className={styles.button}
-            onClick={clearBasket}
-            data-id="basket-clear"
-          >
-            x
-          </button>
-        </div>
-      )}
+            ))}
+            <button
+              className={styles.button}
+              onClick={clearBasket}
+              data-id="basket-clear"
+            >
+              x
+            </button>
+          </div>
+        ) : (
+          <div className={styles.products}>Корзина пуста</div>
+        ))}
     </div>
   );
 };
