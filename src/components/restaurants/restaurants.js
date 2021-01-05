@@ -26,7 +26,7 @@ Restaurants.propTypes = {
   restaurants: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-    })
+    }).isRequired
   ).isRequired,
 };
 
