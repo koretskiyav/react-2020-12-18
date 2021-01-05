@@ -5,7 +5,7 @@ import { clearPosition, decrement, increment } from '../../redux/actions';
 import OrderItem from '../orderItem';
 import Chart from './chart';
 
-const ChartContainer = (props) => {
+const CartContainer = (props) => {
   const restaurants = useSelector((state) => state.restaurants);
   const products = useSelector((state) => state.order);
   const dispatch = useDispatch();
@@ -66,4 +66,4 @@ const ChartContainer = (props) => {
     </>
   );
 };
-export default ChartContainer;
+export default CartContainer;
