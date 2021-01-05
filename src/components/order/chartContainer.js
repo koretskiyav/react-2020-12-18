@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clearPosition, decrement, increment } from '../../redux/actions';
 import OrderItem from '../orderItem';
+import Chart from './chart';
 
-const Order = (props) => {
+const ChartContainer = (props) => {
   const restaurants = useSelector((state) => state.restaurants);
   const products = useSelector((state) => state.order);
   const dispatch = useDispatch();
@@ -61,11 +62,8 @@ const Order = (props) => {
 
   return (
     <>
-      <h2 data-id="OrdersBox">My order:</h2>
-
-      <ul>{[...arrayLi]}</ul>
-      <span>TOTAL PRICE {totalPrice}$</span>
+      <Chart totalPrice={totalPrice} orderItemsArray={arrayLi} />
     </>
   );
 };
-export default Order;
+export default ChartContainer;

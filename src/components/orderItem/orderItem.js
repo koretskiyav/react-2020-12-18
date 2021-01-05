@@ -17,10 +17,12 @@ const OrderItem = ({
   return (
     <>
       <li data-id="OrderItem" key={id}>
-        position: {name} / quantity : {quantity} / price per portion: {price} /
-        price per position: {pricePerPosition}{' '}
+        position: <span data-id="OrderItemName">{name}</span> / quantity :{' '}
+        {quantity} / price per portion: {price} / price per position:{' '}
+        {pricePerPosition}{' '}
         <div className={styles.buttons}>
           <button
+            data-id="decrementButton"
             onClick={() => onDecrementClickJHandler(id)}
             className={styles.button}
           >
