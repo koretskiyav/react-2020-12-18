@@ -1,99 +1,65 @@
-import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import { clear, increment, decrement } from '../../redux/actions';
-import MinusIcon from './icons/minus.svg';
-import PlusIcon from './icons/plus.svg';
-import popup from '../../hocs/popup';
 
 import styles from './basket.module.css';
+import itemStyles from './basket-item/basket-item.module.css';
+import BasketItem from './basket-item';
+import Button from '../button';
 
-const Basket = ({
-  order = {},
-  restaurants,
-  clearBasket,
-  increment,
-  decrement,
-  isOpenBasket,
-  hideBasket,
-  openBasket,
-}) => {
-  const products = useMemo(() => {
-    return restaurants.flatMap(({ menu }) => menu);
-  }, [restaurants]);
-
-  const getCountProduct = (productId) => {
-    return order[productId] || 0;
-  };
+function Basket({ title = 'Basket', total, orderProducts }) {
+  if (!total) {
+    return (
+      <div className={styles.basket}>
+        <h4 className={styles.title}>Select a meal from the list</h4>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.basket}>
-      <button
-        className={styles.button}
-        onClick={isOpenBasket ? hideBasket : openBasket}
-        data-id="basket-clear"
-      >
-        ≡
-      </button>
-      {isOpenBasket && (
-        <div className={styles.products}>
-          {products.map((product) => (
-            <div key={product.id} className={styles.product}>
-              {product.name}
-              <div>Price {product.price} $ </div>
-              <div>Count {getCountProduct(product.id)}</div>
-              <div>
-                Total coast {getCountProduct(product.id) * product.price}
-              </div>
-              <div className={styles.buttons}>
-                <button
-                  className={styles.button}
-                  onClick={() => decrement(product.id)}
-                  data-id="product-decrement"
-                >
-                  <img src={MinusIcon} alt="minus" />
-                </button>
-                <button
-                  className={styles.button}
-                  onClick={() => increment(product.id)}
-                  data-id="product-increment"
-                >
-                  <img src={PlusIcon} alt="plus" />
-                </button>
-              </div>
-            </div>
-          ))}
-          <button
-            className={styles.button}
-            onClick={clearBasket}
-            data-id="basket-clear"
-          >
-            x
-          </button>
+      <h4 className={styles.title}>{title}</h4>
+      {orderProducts.map(({ product, amount, subtotal }) => (
+        <BasketItem
+          product={product}
+          amount={amount}
+          key={product.id}
+          subtotal={subtotal}
+        />
+      ))}
+      <hr className={styles.hr} />
+      <div className={itemStyles.basketItem}>
+        <div className={itemStyles.name}>
+          <p>Total</p>
         </div>
-      )}
+        <div className={itemStyles.info}>
+          <p>{`${total} $`}</p>
+        </div>
+      </div>
+      <Button primary block>
+        checkout
+      </Button>
     </div>
   );
-};
+}
 
-Basket.propTypes = {
-  order: PropTypes.object.isRequired,
-  clearBasket: PropTypes.func.isRequired,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  hideBasket: PropTypes.func.isRequired,
-  openBasket: PropTypes.func.isRequired,
-  isOpenBasket: PropTypes.bool.isRequired,
-};
+export default connect((state) => {
+  const allProducts = state.restaurants.flatMap(
+    (restaurant) => restaurant.menu
+  );
 
-const mapStateToProps = (state) => ({
-  order: state.order,
-});
+  const orderProducts = Object.keys(state.order)
+    .filter((productId) => state.order[productId] > 0)
+    .map((productId) => allProducts.find((product) => product.id === productId))
+    .map((product) => ({
+      product,
+      amount: state.order[product.id],
+      subtotal: state.order[product.id] * product.price,
+    }));
 
-const mapDispatchToProps = (dispatch) => ({
-  clearBasket: () => dispatch(clear()),
-  increment: (productId) => dispatch(increment(productId)),
-  decrement: (productId) => dispatch(decrement(productId)),
-});
+  const total = orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0);
 
-export default connect(mapStateToProps, mapDispatchToProps)(popup(Basket));
+  return {
+    total,
+    orderProducts,
+  };
+})(Basket);

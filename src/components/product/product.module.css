@@ -4,8 +4,6 @@
   border: 1px solid var(--grey);
   background-color: var(--white);
   color: var(--black);
-  text-decoration: none;
-  outline: none;
   transition: 0.2s all;
 }
 
@@ -70,45 +68,6 @@
   justify-content: space-between;
   align-items: center;
   width: auto;
-}
-
-.button {
-  color: var(--white);
-  background-color: var(--yellow);
-  border: 1px solid var(--yellow);
-  border-radius: 2px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  font-weight: 700;
-  font-size: 24px;
-  outline: none;
-  box-shadow: none;
-  cursor: pointer;
-}
-
-.button:first-child {
-  font-size: 20px;
-}
-
-.button:hover,
-.button:focus,
-.button:active {
-  border-color: var(--yellow-light);
-  background-color: var(--yellow-light);
-}
-
-.button + button {
-  margin-left: 1px;
-}
-
-.button svg {
-  width: 1.6em;
-  height: 1.6em;
 }
 
 @media all and (max-width: 767px) {
