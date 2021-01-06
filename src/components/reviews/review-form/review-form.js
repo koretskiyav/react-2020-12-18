@@ -4,6 +4,7 @@ import useForm from '../../../hooks/use-form';
 import Rate from '../../rate';
 import styles from './review-form.module.css';
 import { connect } from 'react-redux';
+import { addReview, addUser } from '../../../redux/actions';
 import Button from '../../button';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 5 };
@@ -51,6 +52,16 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
+export default connect(null, (dispatch) => ({
+  onSubmit: (values) => {
+    const newUser = addUser({ name: values.name });
+    dispatch(newUser);
+
+    const newReview = addReview({
+      userId: newUser.payload.id,
+      rating: values.rating,
+      text: values.text,
+    });
+    dispatch(newReview);
+  }
 }))(ReviewForm);
