@@ -13,7 +13,7 @@ const Restaurant = ({ restaurant }) => {
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
-    { title: 'Reviews', content: <Reviews reviews={reviews} /> },
+    { title: 'Reviews', content: <Reviews reviews={reviews} restaurant={restaurant.id} /> },
   ];
 
   return (
