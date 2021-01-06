@@ -6,7 +6,7 @@ import styles from './review-form.module.css';
 import { connect } from 'react-redux';
 import Button from '../../button';
 
-const INITIAL_VALUES = { name: '', text: '', rating: 5 };
+const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
@@ -25,7 +25,7 @@ const ReviewForm = ({ onSubmit }) => {
           <input
             placeholder="Your name"
             className={styles.message}
-            {...handlers.name}
+            {...handlers.yourName}
           />
         </div>
         <div className={styles.reviewFormItem}>
