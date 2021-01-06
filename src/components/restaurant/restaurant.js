@@ -1,19 +1,15 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
-import Rate from '../rate';
+import AverageRate from './averageRate';
 import Tabs from '../tabs';
 
 const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
 
-  const averageRating = useMemo(() => {
-    // TODO rating
-    const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
-    return Math.round(total / reviews.length);
-  }, [reviews]);
+  // moved to './averageRate';
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
@@ -23,7 +19,7 @@ const Restaurant = ({ restaurant }) => {
   return (
     <div>
       <Banner heading={name}>
-        <Rate value={averageRating} />
+        <AverageRate reviews={reviews} />
       </Banner>
       <Tabs tabs={tabs} />
     </div>
