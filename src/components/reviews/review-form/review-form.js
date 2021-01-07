@@ -3,16 +3,19 @@ import useForm from '../../../hooks/use-form';
 
 import Rate from '../../rate';
 import styles from './review-form.module.css';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Button from '../../button';
+import logger from '../../../redux/middleware/logger';
+import { postReview } from '../../../redux/actions';
 
 const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
-
+  const dispatch = useDispatch();
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    console.log('handle submit');
     onSubmit(values);
     reset();
   };
@@ -51,6 +54,10 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //  onClick: event => dispatch(trackClick(event)),
+    onSubmit: (values) => dispatch(postReview(values)),
+  };
+};
+export default connect(null, mapDispatchToProps)(ReviewForm);
