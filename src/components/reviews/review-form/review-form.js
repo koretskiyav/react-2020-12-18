@@ -3,23 +3,20 @@ import useForm from '../../../hooks/use-form';
 
 import Rate from '../../rate';
 import styles from './review-form.module.css';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Button from '../../button';
-import logger from '../../../redux/middleware/logger';
 import { postReview } from '../../../redux/actions';
 
 const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
-  const dispatch = useDispatch();
   const activeRestaurantId = useSelector(
     (state) => state.restaurants.activeRestaurantId
   );
   const handleSubmit = (ev) => {
     ev.preventDefault();
     onSubmit(values, activeRestaurantId);
-
     reset();
   };
 
