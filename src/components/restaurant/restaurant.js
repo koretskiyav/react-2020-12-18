@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
 import Reviews from '../reviews';
@@ -6,13 +6,22 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 import { allReviewsSelector } from '../../redux/selectors';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { setRestaurantActive } from '../../redux/actions';
 
-const Restaurant = ({ restaurant, allReviews }) => {
+const Restaurant = ({ restaurant }) => {
+  const dispatch = useDispatch();
+  //todo вот тут нужно ставить в стейт айди ресторана. далее в редюсере рестарантс при пост Ревью добавлять из пейлоада в нужный ресторан айди ревьюшки
+  useEffect(() => {
+    dispatch(setRestaurantActive(restaurant.id));
+  }, [restaurant.id]);
+
   const { name, menu, reviews } = restaurant;
-
+  const allReviews = useSelector((state) => state.reviews);
   const filteredReviews = useMemo(() => {
-    return allReviews.filter((reviewObj) => reviews.includes(reviewObj.id));
+    return Object.keys(allReviews).filter((allReviewKey) =>
+      reviews.includes(allReviewKey)
+    );
   }, [allReviews, reviews]);
 
   const averageRating = useMemo(() => {
@@ -51,7 +60,4 @@ Restaurant.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  allReviews: allReviewsSelector(state),
-});
-export default connect(mapStateToProps)(Restaurant);
+export default Restaurant;

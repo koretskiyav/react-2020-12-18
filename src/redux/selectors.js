@@ -36,11 +36,13 @@ export const allRestaurantsSelector = createSelector(
 //todo у меня есть объект с ревью я беру из него keys и
 // получаю массив ключей ревьюх, маплю их в объект
 //с user text rating и подключаю где нужно
-export const allReviewsSelector = createSelector(
-  reviewSelector,
-  usersSelector,
-  (reviews, users) =>
+/*export const allReviewsSelector = createSelector(
+    usersSelector,
+    reviewSelector,
+
+  (users,reviews) =>
     Object.keys(reviews).map((reviewId) => {
+        debugger
       return {
         user: users[reviews[reviewId].userId].name,
         text: reviews[reviewId].text,
@@ -48,7 +50,7 @@ export const allReviewsSelector = createSelector(
         id: reviews[reviewId].id,
       };
     })
-);
+);*/
 
 /*
     {

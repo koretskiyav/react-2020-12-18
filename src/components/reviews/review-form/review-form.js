@@ -3,7 +3,7 @@ import useForm from '../../../hooks/use-form';
 
 import Rate from '../../rate';
 import styles from './review-form.module.css';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Button from '../../button';
 import logger from '../../../redux/middleware/logger';
 import { postReview } from '../../../redux/actions';
@@ -13,10 +13,13 @@ const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
   const dispatch = useDispatch();
+  const activeRestaurantId = useSelector(
+    (state) => state.restaurants.activeRestaurantId
+  );
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    console.log('handle submit');
-    onSubmit(values);
+    onSubmit(values, activeRestaurantId);
+
     reset();
   };
 
@@ -56,8 +59,8 @@ const ReviewForm = ({ onSubmit }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //  onClick: event => dispatch(trackClick(event)),
-    onSubmit: (values) => dispatch(postReview(values)),
+    onSubmit: (values, activeRestaurantId) =>
+      dispatch(postReview(values, activeRestaurantId)),
   };
 };
 export default connect(null, mapDispatchToProps)(ReviewForm);

@@ -11,13 +11,28 @@ export default (reviews = defaultReviews, action) => {
 
   switch (type) {
     case POST_REVIEW:
-      console.log(payload);
+      return {
+        ...reviews,
+        [payload.id]: {
+          id: payload.id,
+          rating: payload.rating,
+          text: payload.text,
+          userId: payload.userId,
+        },
+      };
+      /*5db6247b-ab1c-49db-be1f-8dd27fd38b81:
+id: "5db6247b-ab1c-49db-be1f-8dd27fd38b81"
+rating: 5
+text: "Finally! This place is amazing place for breakfast, lunch, dinner and supper"
+userId: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54"
 
-      /*return {...reviews, [payload.id]:{
-        id:payload.id,
-        userId:payload.yourName,
-        text:payload.text,
-        rating:payload.rating
+
+
+id: "b1d4fef8-743e-4ddf-913d-9404376d43d0"
+rating: 5
+text: "asasa"
+userId: "b39d366f-b2f4-4834-8825-277aa5df0aa2"
+yourName: "asa"
         }}*/
       break;
 

@@ -10,8 +10,9 @@ const Reviews = ({ filteredReviews }) => {
   return (
     <div className={styles.reviews}>
       {filteredReviews.map((review) => (
-        <Review key={review.id} {...review} />
+        <Review key={review} id={review} />
       ))}
+
       <ReviewForm />
     </div>
   );
