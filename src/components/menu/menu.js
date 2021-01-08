@@ -9,9 +9,7 @@ import styles from './menu.module.css';
 class Menu extends React.Component {
   static propTypes = {
     menu: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired
+      PropTypes.string.isRequired
     ).isRequired,
   };
 
