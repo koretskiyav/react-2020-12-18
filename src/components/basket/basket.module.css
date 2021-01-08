@@ -1,0 +1,29 @@
+.basket {
+  padding: 13px 16px 20px;
+  background-color: var(--pink);
+}
+
+.basket a {
+  text-decoration: none;
+}
+
+.hr {
+  margin: 14px 0;
+}
+
+.title {
+  text-align: center;
+  margin: 20px 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.button {
+  margin-top: 22px;
+}
+
+@media all and (max-width: 767px) {
+  .basket {
+    padding: 20px 24px;
+  }
+}

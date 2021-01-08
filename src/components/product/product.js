@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './product.module.css';
-import MinusIcon from './icons/minus.svg';
-import PlusIcon from './icons/plus.svg';
+
 import { decrement, increment } from '../../redux/actions';
+
+import Button from '../button';
 
 const Product = ({ product, amount, increment, decrement, fetchData }) => {
   useEffect(() => {
@@ -25,20 +26,8 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
               {amount}
             </div>
             <div className={styles.buttons}>
-              <button
-                className={styles.button}
-                onClick={decrement}
-                data-id="product-decrement"
-              >
-                <img src={MinusIcon} alt="minus" />
-              </button>
-              <button
-                className={styles.button}
-                onClick={increment}
-                data-id="product-increment"
-              >
-                <img src={PlusIcon} alt="plus" />
-              </button>
+              <Button onClick={decrement} icon="minus" />
+              <Button onClick={increment} icon="plus" />
             </div>
           </div>
         </div>
@@ -61,7 +50,8 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  amount: state.order[ownProps.product.id] || 0,
+  amount: state.order[ownProps.id] || 0,
+  product: state.products[ownProps.id],
 });
 
 // const mapDispatchToProps = {
@@ -70,8 +60,8 @@ const mapStateToProps = (state, ownProps) => ({
 // };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  increment: () => dispatch(increment(ownProps.product.id)),
-  decrement: () => dispatch(decrement(ownProps.product.id)),
+  increment: () => dispatch(increment(ownProps.id)),
+  decrement: () => dispatch(decrement(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
