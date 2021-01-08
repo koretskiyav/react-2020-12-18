@@ -2,23 +2,9 @@ import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import CartItem from './cartItem';
 import PropTypes from 'prop-types';
-import { getProductInfo } from '../../functions/helpers';
 import styles from './cart.module.css';
 
-const Cart = ({ order }) => {
-  const cartItems = useMemo(
-    () =>
-      Object.keys(order).map((id) => ({
-        product: getProductInfo(id),
-        amount: order[id],
-      })),
-    [order]
-  );
-  const sum = cartItems.reduce(
-    (acc, cartItem) => acc + cartItem.product.price * cartItem.amount,
-    0
-  );
-
+const Cart = ({ cartItems, sum }) => {
   return (
     <div className="cart">
       <ul>
@@ -39,8 +25,17 @@ Cart.propTypes = {
   order: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  order: state.order,
-});
+export default connect((state) => {
+  const cartItems = Object.keys(state.order).map((id) => ({
+    product: state.restaurants
+      .flatMap((restaurant) => restaurant.menu)
+      .find((item) => item.id === id),
+    amount: state.order[id],
+  }));
+  const sum = cartItems.reduce(
+    (acc, cartItem) => acc + cartItem.product.price * cartItem.amount,
+    0
+  );
 
-export default connect(mapStateToProps)(Cart);
+  return { cartItems, sum };
+})(Cart);
