@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
 import Reviews from '../reviews';
@@ -32,13 +33,13 @@ const Restaurant = ({ restaurant }) => {
 Restaurant.propTypes = {
   restaurant: PropTypes.shape({
     name: PropTypes.string,
-    menu: PropTypes.array,
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        rating: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
+    menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
 };
 
-export default Restaurant;
+const mapStateToProps = (state, ownProps) => ({
+  restaurant: state.restaurants[ownProps.id],
+});
+
+export default connect(mapStateToProps)(Restaurant);
