@@ -6,6 +6,8 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 
+import { connect } from 'react-redux';
+
 const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
 
@@ -28,17 +30,22 @@ const Restaurant = ({ restaurant }) => {
     </div>
   );
 };
-
+/*
 Restaurant.propTypes = {
   restaurant: PropTypes.shape({
     name: PropTypes.string,
     menu: PropTypes.array,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
-        rating: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
       }).isRequired
     ).isRequired,
   }).isRequired,
 };
+*/
 
-export default Restaurant;
+const mapStateToProps = (state, ownProps) => ({
+  restaurant: state.restaurants[ownProps.id],
+});
+
+export default connect(mapStateToProps)(Restaurant);
