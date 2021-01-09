@@ -5,10 +5,11 @@ import Rate from '../../rate';
 import styles from './review-form.module.css';
 import { connect } from 'react-redux';
 import Button from '../../button';
+import { addReview, increment } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 5 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, restaurantId }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
@@ -20,6 +21,7 @@ const ReviewForm = ({ onSubmit }) => {
   return (
     <div className={styles.reviewForm}>
       <h4 className={styles.addReviewTitle}>Leave your review</h4>
+      <h5 className={styles.addReviewTitle}>restaurantId: {restaurantId}</h5>
       <form onSubmit={handleSubmit}>
         <div className={styles.reviewFormItem}>
           <input
@@ -51,6 +53,7 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
+export default connect(null, (dispatch, ownProps) => ({
+  //onSubmit: (values) => console.log(values), // TODO
+  onSubmit: (values) => dispatch(addReview(values, ownProps.restaurantId)),
 }))(ReviewForm);

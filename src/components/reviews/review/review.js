@@ -33,15 +33,14 @@ Review.propTypes = {
     rating: PropTypes.number.isRequired,
   }),
 };
-
+/*
 Review.defaultProps = {
   user: 'Anonymous',
 };
-
+*/
 export default connect((state, ownProps) => {
   const review = state.reviews[ownProps.id];
   const user = state.users[review.userId];
 
   return { review, user };
 })(Review);
-//export default Review;
