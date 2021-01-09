@@ -1,14 +1,25 @@
-import { ADD_REVIEW } from '../constants';
+import { ADD_REVIEW, ADD_USER } from '../constants';
 
 export default (store) => (next) => (action) => {
   console.log('before guid: ', store.getState());
+  const userId = generateGuid();
+  const reviewId = generateGuid();
   if (action.type === ADD_REVIEW) {
-    //action.payload.review = { ...action.payload.review, id: generateGuid() }
-    action.payload.review.id = generateGuid();
+    // добавляем нового пользака
+    store.dispatch({
+      type: ADD_USER,
+      payload: { user: { id: userId, name: action.payload.review.name } },
+    });
+
+    //store.dispatch({type:ADD_USER,payload:{user:{id: userId, name: action.payload.review.name }}});
+
+    // добавляем review в reviews
+    const review = { ...action.payload.review, id: reviewId, userId };
+    action.payload.review = review;
   }
-  debugger;
   next(action);
-  console.log('after guid: ', store.getState());
+
+  //console.log('after guid: ', store.getState());
 };
 
 //https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid

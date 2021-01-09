@@ -5,15 +5,15 @@ const defaultReviews = normalizedReviews.reduce(
   (acc, review) => ({ ...acc, [review.id]: review }),
   {}
 );
-export default (reviews = defaultReviews, action) => {
+export default (state = defaultReviews, action) => {
   const { type, payload } = action;
-
+  //payload.restaurantId
+  //payload.review
   switch (type) {
     case ADD_REVIEW: {
-      console.log('add review', payload);
-      return reviews;
+      return { ...state, [payload.review.id]: payload.review };
     }
     default:
-      return reviews;
+      return state;
   }
 };
