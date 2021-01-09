@@ -10,18 +10,16 @@ const Restaurants = ({ restaurants }) => {
     content: <Restaurant id={restaurant.id} />,
   }));
 
-  console.log({ restaurants });
-
   return <Tabs tabs={tabs} />;
 };
 
-// Restaurants.propTypes = {
-//   restaurants: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//     }).isRequired
-//   ).isRequired,
-// };
+Restaurants.propTypes = {
+  restaurants: PropTypes.shape(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
 
 export default connect((state) => ({
   restaurants: state.restaurants,

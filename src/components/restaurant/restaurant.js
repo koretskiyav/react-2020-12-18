@@ -7,13 +7,17 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 
-const Restaurant = ({ restaurant }) => {
+const Restaurant = ({ restaurant, restaurantReviews }) => {
   const { name, menu, reviews } = restaurant;
 
   const averageRating = useMemo(() => {
-    const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
+    const total = reviews.reduce(
+      (acc, id) => acc + restaurantReviews[id].rating,
+      0
+    );
+
     return Math.round(total / reviews.length);
-  }, [reviews]);
+  }, [reviews, restaurantReviews]);
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
@@ -40,6 +44,7 @@ Restaurant.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   restaurant: state.restaurants[ownProps.id],
+  restaurantReviews: state.reviews,
 });
 
 export default connect(mapStateToProps)(Restaurant);
