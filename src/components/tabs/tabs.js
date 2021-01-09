@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { connect } from 'react-redux';
 
 import styles from './tabs.module.css';
+import { setRestaurantId } from '../../redux/actions';
 
-const Tabs = ({ tabs }) => {
+const Tabs = ({ tabs, setRestaurantId }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  const { content } = tabs[activeTab];
+  const { content, id } = tabs[activeTab];
+
+  const process = (index, id) => {
+    setActiveTab(index);
+
+    setRestaurantId(id);
+  };
 
   return (
     <>
@@ -16,7 +24,7 @@ const Tabs = ({ tabs }) => {
           <span
             key={title}
             className={cn(styles.tab, { [styles.active]: index === activeTab })}
-            onClick={() => setActiveTab(index)}
+            onClick={() => process(index, id)}
           >
             {title}
           </span>
@@ -32,8 +40,11 @@ Tabs.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.element.isRequired,
+      restaurantId: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
 };
 
-export default Tabs;
+export default connect(null, (dispatch, ownProps) => ({
+  setRestaurantId: (activeId) => dispatch(setRestaurantId(activeId)),
+}))(Tabs);
