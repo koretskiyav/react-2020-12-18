@@ -9,7 +9,6 @@ const Restaurants = ({ restaurants }) => {
   const tabs = restaurants.map((restaurant) => ({
     title: restaurant.name,
     content: <Restaurant restaurant={restaurant} />,
-    id: restaurant.id,
   }));
 
   return <Tabs tabs={tabs} />;
