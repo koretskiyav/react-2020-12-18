@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Rate from '../../rate';
 import styles from './review.module.css';
 
+import { reviewsSelector, usersSelector } from '../../../redux/selectors';
+
 const Review = ({ review, userName }) => (
   <div className={styles.review} data-id="review">
     <div className={styles.content}>
@@ -41,9 +43,9 @@ Review.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const review = state.reviews[ownProps.id];
+  const review = reviewsSelector(state)[ownProps.id];
   const userId = review.userId;
-  const userName = state.users[userId];
+  const userName = usersSelector(state)[userId];
 
   return {
     review,
