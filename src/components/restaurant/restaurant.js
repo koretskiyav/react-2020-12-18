@@ -9,6 +9,7 @@ import Tabs from '../tabs';
 import { connect } from 'react-redux';
 
 const Restaurant = ({ restaurant }) => {
+  console.log('restaurant render');
   const { name, menu, reviews } = restaurant;
 
   const averageRating = useMemo(() => {
@@ -33,19 +34,6 @@ const Restaurant = ({ restaurant }) => {
     </div>
   );
 };
-/*
-Restaurant.propTypes = {
-  restaurant: PropTypes.shape({
-    name: PropTypes.string,
-    menu: PropTypes.array,
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
-  }).isRequired,
-};
-*/
 
 const mapStateToProps = (state, ownProps) => ({
   restaurant: state.restaurants[ownProps.id],

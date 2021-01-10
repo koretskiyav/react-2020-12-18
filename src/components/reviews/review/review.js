@@ -6,7 +6,6 @@ import styles from './review.module.css';
 import { connect } from 'react-redux';
 
 const Review = ({ review, user }) => {
-  console.log(review);
   return (
     <div className={styles.review} data-id="review">
       <div className={styles.content}>

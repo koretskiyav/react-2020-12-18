@@ -10,6 +10,7 @@ export default (state = defaultUsers, action) => {
 
   switch (type) {
     case ADD_USER: {
+      console.log('ADD_USER');
       return { ...state, [payload.user.id]: payload.user };
     }
     default:

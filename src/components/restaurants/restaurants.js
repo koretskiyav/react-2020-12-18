@@ -6,7 +6,7 @@ import Tabs from '../tabs';
 import { restaurantsSelector } from '../../redux/selectors';
 
 const Restaurants = ({ restaurants }) => {
-  //debugger;
+  console.log('Restaurants render');
 
   const tabs = Object.keys(restaurants).map((id) => ({
     title: restaurants[id].name,
@@ -25,5 +25,5 @@ Restaurants.propTypes = {
 };
 
 export default connect((state) => ({
-  restaurants: state.restaurants,
+  restaurants: restaurantsSelector(state),
 }))(Restaurants);
