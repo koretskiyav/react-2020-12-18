@@ -11,9 +11,13 @@ const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
+
   const activeRestaurantId = useSelector(
     (state) => state.restaurants.activeRestaurantId
   );
+  const reviewState = useSelector((state) => state.reviews);
+  const { error, errorMessage } = reviewState;
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     onSubmit(values, activeRestaurantId);
@@ -30,6 +34,7 @@ const ReviewForm = ({ onSubmit }) => {
             className={styles.message}
             {...handlers.yourName}
           />
+          {error && <p className={styles.errorMessage}>{errorMessage}</p>}
         </div>
         <div className={styles.reviewFormItem}>
           <textarea
@@ -45,7 +50,7 @@ const ReviewForm = ({ onSubmit }) => {
           </span>
         </div>
         <div className={styles.publish}>
-          <Button primary block>
+          <Button error={error} primary block>
             PUBLISH REVIEW
           </Button>
         </div>

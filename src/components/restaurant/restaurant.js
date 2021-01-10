@@ -28,7 +28,7 @@ const Restaurant = ({ restaurant }) => {
       .reduce((acc, rating) => acc + rating, 0);
 
     return Math.round(total / reviews.length);
-  }, [reviews]);
+  }, [reviews, allReviews]);
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
@@ -37,7 +37,7 @@ const Restaurant = ({ restaurant }) => {
       content: <Reviews filteredReviews={filteredReviews} />,
     },
   ];
-  debugger;
+
   return (
     <div>
       <Banner heading={name}>

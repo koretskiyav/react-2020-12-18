@@ -14,6 +14,10 @@ export default (users = defaultUsers, action) => {
 
   switch (type) {
     case POST_REVIEW:
+      if (!payload.yourName) {
+        return { ...users };
+        break;
+      }
       return {
         ...users,
         [payload.userId]: {

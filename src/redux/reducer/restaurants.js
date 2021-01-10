@@ -17,6 +17,10 @@ export default (restaurants = defaultRestaurants, action) => {
       return { ...restaurants, activeRestaurantId: payload.id };
       break;
     case POST_REVIEW:
+      if (!payload.yourName) {
+        return { ...restaurants };
+        break;
+      }
       const activeRestaurantId = payload.activeRestaurantId;
       const restaurant = restaurants[activeRestaurantId];
       restaurant.reviews.push(payload.id);
