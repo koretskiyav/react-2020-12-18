@@ -15,11 +15,7 @@ const Restaurants = ({ restaurants }) => {
 };
 
 Restaurants.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  restaurants: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default connect((state) => ({

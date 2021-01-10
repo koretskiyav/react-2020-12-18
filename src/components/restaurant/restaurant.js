@@ -5,13 +5,11 @@ import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
-import { allReviewsSelector } from '../../redux/selectors';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setRestaurantActive } from '../../redux/actions';
 
 const Restaurant = ({ restaurant }) => {
   const dispatch = useDispatch();
-  //todo вот тут нужно ставить в стейт айди ресторана. далее в редюсере рестарантс при пост Ревью добавлять из пейлоада в нужный ресторан айди ревьюшки
   useEffect(() => {
     dispatch(setRestaurantActive(restaurant.id));
   }, [restaurant.id]);
@@ -25,7 +23,9 @@ const Restaurant = ({ restaurant }) => {
   }, [allReviews, reviews]);
 
   const averageRating = useMemo(() => {
-    const total = filteredReviews.reduce((acc, { rating }) => acc + rating, 0);
+    const total = filteredReviews
+      .map((reviewId) => allReviews[reviewId].rating)
+      .reduce((acc, rating) => acc + rating, 0);
 
     return Math.round(total / reviews.length);
   }, [reviews]);
@@ -37,7 +37,7 @@ const Restaurant = ({ restaurant }) => {
       content: <Reviews filteredReviews={filteredReviews} />,
     },
   ];
-
+  debugger;
   return (
     <div>
       <Banner heading={name}>
