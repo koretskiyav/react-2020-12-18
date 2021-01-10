@@ -32,7 +32,8 @@
 
 ## HT4
 
-1. Переписать редьюсеры **review** и **restaurant** на key=>value (аналогично **products**)
+1. Переписать редьюсеры **review** и **restaurant**
+   на key=>value (аналогично **products**)
 2. Добавить **users** редьюсер
 3. Починить отображение **Review** компонента (взять данные из редьюсеров **review** и **users**)
 4. Написать **middleware** для генерации **[uuid](https://github.com/uuidjs/uuid)**

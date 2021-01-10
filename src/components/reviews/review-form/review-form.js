@@ -3,17 +3,24 @@ import useForm from '../../../hooks/use-form';
 
 import Rate from '../../rate';
 import styles from './review-form.module.css';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Button from '../../button';
+import { postReview } from '../../../redux/actions';
 
-const INITIAL_VALUES = { name: '', text: '', rating: 5 };
+const INITIAL_VALUES = { yourName: '', text: '', rating: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
+  const activeRestaurantId = useSelector(
+    (state) => state.restaurants.activeRestaurantId
+  );
+  const reviewState = useSelector((state) => state.reviews);
+  const { error, errorMessage } = reviewState;
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    onSubmit(values);
+    onSubmit(values, activeRestaurantId);
     reset();
   };
 
@@ -25,8 +32,9 @@ const ReviewForm = ({ onSubmit }) => {
           <input
             placeholder="Your name"
             className={styles.message}
-            {...handlers.name}
+            {...handlers.yourName}
           />
+          {error && <p className={styles.errorMessage}>{errorMessage}</p>}
         </div>
         <div className={styles.reviewFormItem}>
           <textarea
@@ -42,7 +50,7 @@ const ReviewForm = ({ onSubmit }) => {
           </span>
         </div>
         <div className={styles.publish}>
-          <Button primary block>
+          <Button error={error} primary block>
             PUBLISH REVIEW
           </Button>
         </div>
@@ -51,6 +59,10 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (values, activeRestaurantId) =>
+      dispatch(postReview(values, activeRestaurantId)),
+  };
+};
+export default connect(null, mapDispatchToProps)(ReviewForm);
