@@ -15,15 +15,14 @@ export default (restaurants = defaultRestaurants, action) => {
   switch (type) {
     case ADD_REVIEW: {
       const addedNewReview = payload.values.id;
-      console.log(addedNewReview);
       const activeRestaurantId = payload.activeRestaurantId.activeRestaurantId;
-      const activeRestaurant = restaurants[activeRestaurantId];
+      const activeRestaurantData = restaurants[activeRestaurantId];
 
       return {
         ...restaurants,
         [activeRestaurantId]: {
-          ...activeRestaurant,
-          ...activeRestaurant.reviews.push(addedNewReview),
+          ...activeRestaurantData,
+          ...activeRestaurantData.reviews.push(addedNewReview),
         },
       };
     }
