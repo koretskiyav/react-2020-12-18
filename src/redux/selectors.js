@@ -3,6 +3,7 @@ import Restaurant from '../components/restaurant/restaurant';
 
 const restaurantsSelector = (state) => state.restaurants;
 const reviewsSelector = (state) => state.reviews;
+const user = (state, props) => state.users[props.userId];
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 
@@ -26,16 +27,16 @@ export const totalSelector = createSelector(
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
 );
 
-export const tabsSelector = createSelector(
-  restaurantsSelector,
-  (restaurantsSelector) =>
-    Object.keys(restaurantsSelector).map((restaurantId) => ({
-      title: restaurantsSelector[restaurantId].name,
-      content: <Restaurant restaurant={restaurantsSelector[restaurantId]} />,
-    }))
+export const tabsSelector = createSelector(restaurantsSelector, (restaurants) =>
+  Object.keys(restaurants).map((restaurantId) => ({
+    title: restaurants[restaurantId].name,
+    content: <Restaurant restaurant={restaurants[restaurantId]} />,
+  }))
 );
 
 export const reviewsItemsSelector = createSelector(
   reviewsSelector,
-  (reviewsSelector) => reviewsSelector
+  (reviewsItems) => reviewsItems
 );
+
+export const userSelector = createSelector(user, (user) => user);

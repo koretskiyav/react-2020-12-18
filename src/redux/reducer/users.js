@@ -1,15 +1,15 @@
-import { normalizedReviews } from '../../fixtures';
+import { normalizedUsers } from '../../fixtures';
 
-const defaultReviews = normalizedReviews.reduce(
-  (acc, review) => ({ ...acc, [review.id]: review }),
+const defaultUsers = normalizedUsers.reduce(
+  (acc, user) => ({ ...acc, [user.id]: user }),
   {}
 );
 
-export default (reviews = defaultReviews, action) => {
+export default (users = defaultUsers, action) => {
   const { type } = action;
 
   switch (type) {
     default:
-      return reviews;
+      return users;
   }
 };
