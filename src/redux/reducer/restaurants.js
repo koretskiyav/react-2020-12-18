@@ -21,11 +21,9 @@ export default (restaurants = defaultRestaurants, action) => {
 
       return {
         ...restaurants,
-        activeRestaurant: {
-          ...activeRestaurant.reviews,
-          [activeRestaurant.reviews]: [
-            activeRestaurant.reviews.push(addedNewReview),
-          ],
+        [activeRestaurantId]: {
+          ...activeRestaurant,
+          ...activeRestaurant.reviews.push(addedNewReview),
         },
       };
     }
