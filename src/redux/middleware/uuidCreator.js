@@ -4,7 +4,6 @@ export default (store) => (next) => (action) => {
   const uuid = uuidv4();
 
   action.payload.values = { id: uuid, ...action.payload.values };
-  console.log(action.payload.values);
 
   next(action);
 };

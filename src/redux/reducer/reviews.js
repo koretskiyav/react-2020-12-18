@@ -1,6 +1,5 @@
 import { normalizedReviews } from '../../fixtures';
 import { ADD_REVIEW } from '../constants';
-import { reviewsSelector } from '../selectors';
 
 const defaultReviews = normalizedReviews.reduce(
   (acc, review) => ({ ...acc, [review.id]: review }),
@@ -13,6 +12,8 @@ export default (reviews = defaultReviews, action) => {
   switch (type) {
     case ADD_REVIEW:
       const addedNewReview = payload.values;
+
+      console.log(addedNewReview.id);
 
       return { ...reviews, [addedNewReview.id]: addedNewReview };
     default:

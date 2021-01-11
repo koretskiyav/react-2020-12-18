@@ -9,7 +9,7 @@ import Tabs from '../tabs';
 import { reviewsSelector, restaurantsSelector } from '../../redux/selectors';
 
 const Restaurant = ({ restaurant, restaurantReviews }) => {
-  const { name, menu, reviews } = restaurant;
+  const { name, menu, reviews, id } = restaurant;
 
   const averageRating = useMemo(() => {
     const total = reviews.reduce(
@@ -22,7 +22,10 @@ const Restaurant = ({ restaurant, restaurantReviews }) => {
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
-    { title: 'Reviews', content: <Reviews reviews={reviews} /> },
+    {
+      title: 'Reviews',
+      content: <Reviews reviews={reviews} activeRestaurantId={id} />,
+    },
   ];
 
   return (

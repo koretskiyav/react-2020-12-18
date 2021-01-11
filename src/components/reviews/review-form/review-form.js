@@ -9,7 +9,7 @@ import { addReview } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 5 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, activeRestaurantId }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
@@ -52,7 +52,6 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, (dispatch) => ({
-  // onSubmit: (values) => console.log(values), // TODO
-  onSubmit: (values) => dispatch(addReview(values)),
+export default connect(null, (dispatch, activeRestaurantId) => ({
+  onSubmit: (values) => dispatch(addReview(values, activeRestaurantId)),
 }))(ReviewForm);
