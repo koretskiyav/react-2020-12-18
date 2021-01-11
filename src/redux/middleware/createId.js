@@ -5,7 +5,8 @@ export default () => (next) => (action) => {
   const { type, payload } = action;
   if (type === ADD_REVIEW) {
     const id = uuidv4();
-    const newReview = { ...payload, id };
+    const userId = uuidv4();
+    const newReview = { ...payload, id, userId };
     action.payload = newReview;
     next(action);
   } else {
