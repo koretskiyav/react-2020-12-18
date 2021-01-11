@@ -4,6 +4,7 @@ import {
   REMOVE,
   ADD_REVIEW,
   SET_ACTIVE_TAB,
+  SET_ACTIVE_RESTAURANT,
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -13,7 +14,7 @@ export const addReview = (review, restaurantId) => ({
   type: ADD_REVIEW,
   payload: { review, restaurantId },
 });
-export const setActiveTab = (index, parentComponent = '') => ({
-  type: SET_ACTIVE_TAB,
-  payload: { index, parentComponent },
+export const setActiveRestaurant = (restaurantId) => ({
+  type: SET_ACTIVE_RESTAURANT,
+  payload: { restaurantId },
 });

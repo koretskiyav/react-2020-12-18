@@ -6,22 +6,29 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
-const Restaurant = ({ restaurant }) => {
-  console.log('restaurant render');
+import { setActiveRestaurant } from '../../redux/actions';
+import {
+  activeRestaurantSelector,
+  averageRatingSelector,
+} from '../../redux/selectors';
+
+import { useEffect } from 'react';
+
+const Restaurant = ({ restaurant, id, averageRating }) => {
   const { name, menu, reviews } = restaurant;
 
-  const averageRating = useMemo(() => {
-    const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
-    return Math.round(total / reviews.length);
-  }, [reviews]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setActiveRestaurant(id));
+  }, []);
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
     {
       title: 'Reviews',
-      content: <Reviews reviews={reviews} restaurantId={restaurant.id} />,
+      content: <Reviews reviews={reviews} />,
     },
   ];
 
@@ -36,7 +43,9 @@ const Restaurant = ({ restaurant }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  restaurant: state.restaurants[ownProps.id],
+  restaurant: activeRestaurantSelector(state),
+  averageRating: averageRatingSelector(state),
+  //restaurant: state.restaurants[ownProps.id],
 });
 
 export default connect(mapStateToProps)(Restaurant);

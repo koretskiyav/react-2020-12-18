@@ -22,7 +22,8 @@ export default (restaurants = defaultRestaurants, action) => {
       restaurants[payload.restaurantId] = newRestaurant;
       return { ...restaurants };
     }
-    default:
+    default: {
       return restaurants;
+    }
   }
 };

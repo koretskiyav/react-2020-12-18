@@ -4,7 +4,7 @@ import restaurants from './restaurants';
 import products from './products';
 import reviews from './reviews';
 import users from './users';
-import activeRestaurant from './activeRestaurant';
+import activeRestaurantId from './activeRestaurantId';
 
 export default combineReducers({
   order,
@@ -12,6 +12,6 @@ export default combineReducers({
   products,
   reviews,
   users,
-  // activeRestaurant,
+  activeRestaurantId,
   foo: (state = 'bar') => state + 'a',
 });

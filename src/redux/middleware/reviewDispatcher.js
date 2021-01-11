@@ -11,6 +11,7 @@ export default (store) => (next) => (action) => {
       type: ADD_USER,
       payload: { user: { id: userId, name: action.payload.review.name } },
     });
+    debugger;
     // Добавляем  ревью в рестораны
     store.dispatch({
       type: ADD_REVEIW_IN_RESTAURANT,
@@ -21,6 +22,7 @@ export default (store) => (next) => (action) => {
     });
 
     // добавляем review в reviews
+
     const review = { ...action.payload.review, id: reviewId, userId };
     action.payload.review = review;
   }

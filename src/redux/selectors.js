@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
+import { useMemo } from 'react';
 
-export const restaurantsSelector = (state) => state.restaurants;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 
@@ -23,3 +23,40 @@ export const totalSelector = createSelector(
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
 );
+export const restaurantsSelector = (state) => state.restaurants;
+export const activeRestaurantId = (state) => state.activeRestaurantId;
+const reviewsSelector = (state) => state.reviews;
+
+export const activeRestaurantSelector = createSelector(
+  restaurantsSelector,
+  activeRestaurantId,
+  (restaurants, activeRestaurantId) => {
+    if (!activeRestaurantId) {
+      return restaurants[Object.keys(restaurants)[0]];
+    } else return restaurants[activeRestaurantId];
+  }
+);
+
+export const averageRatingSelector = createSelector(
+  activeRestaurantSelector,
+  reviewsSelector,
+  (restaurant, review) => {
+    const total = restaurant.reviews.reduce(
+      (acc, id) => acc + review[id].rating,
+      0
+    );
+
+    return Math.round(total / restaurant.reviews.length);
+  }
+);
+/*
+  activeRestaurantSelector
+   */
+/*
+export const restaurantReviewsS = createSelector(
+  restaurantsSelector,
+  activeRestaurantIdSelector,
+  (restaurant, activeRestaurantId) => restaurant[activeRestaurantId]
+);
+
+ */
