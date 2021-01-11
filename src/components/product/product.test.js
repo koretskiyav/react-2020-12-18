@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Product from './product';
+
 import { restaurants } from '../../fixtures';
 
 const product = restaurants[0].menu[0];

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Product from '../product';
+import Basket from '../basket';
 
 import styles from './menu.module.css';
 
@@ -33,6 +34,9 @@ class Menu extends React.Component {
           {menu.map((product) => (
             <Product key={product.id} product={product} />
           ))}
+        </div>
+        <div>
+          <Basket />
         </div>
       </div>
     );
