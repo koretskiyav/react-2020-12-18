@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import Restaurant from '../components/restaurant/restaurant';
 
 const restaurantsSelector = (state) => state.restaurants;
+const reviewsSelector = (state) => state.reviews;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 
@@ -32,4 +33,9 @@ export const tabsSelector = createSelector(
       title: restaurantsSelector[restaurantId].name,
       content: <Restaurant restaurant={restaurantsSelector[restaurantId]} />,
     }))
+);
+
+export const reviewsItemsSelector = createSelector(
+  reviewsSelector,
+  (reviewsSelector) => reviewsSelector
 );

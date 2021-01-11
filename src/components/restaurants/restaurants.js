@@ -9,7 +9,7 @@ const Restaurants = ({ tabs }) => {
 };
 
 Restaurants.propTypes = {
-  tabs: PropTypes.objectOf(
+  tabs: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.element.isRequired,
