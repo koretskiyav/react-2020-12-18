@@ -7,11 +7,11 @@ import ReviewForm from './review-form';
 import styles from './reviews.module.css';
 import { reviewsItemsSelector } from '../../redux/selectors';
 
-const Reviews = ({ reviews, reviewsItems }) => {
+const Reviews = ({ reviewsItems }) => {
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} {...reviewsItems[id]} />
+      {reviewsItems.map((review) => (
+        <Review key={review.id} {...review} />
       ))}
       <ReviewForm />
     </div>
@@ -19,9 +19,16 @@ const Reviews = ({ reviews, reviewsItems }) => {
 };
 
 Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.string.isRequired),
+  reviewsItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      userId: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+    }).isRequired
+  ),
 };
 
-export default connect((state) => ({
-  reviewsItems: reviewsItemsSelector(state),
+export default connect((state, props) => ({
+  reviewsItems: reviewsItemsSelector(state, props),
 }))(Reviews);
