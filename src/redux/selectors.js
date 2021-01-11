@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import Restaurant from '../components/restaurant/restaurant';
 
-// const restaurantsSelector = (state) => state.restaurants;
+const restaurantsSelector = (state) => state.restaurants;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 
@@ -22,4 +23,13 @@ export const totalSelector = createSelector(
   orderProductsSelector,
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
+);
+
+export const tabsSelector = createSelector(
+  restaurantsSelector,
+  (restaurantsSelector) =>
+    Object.keys(restaurantsSelector).map((restaurantId) => ({
+      title: restaurantsSelector[restaurantId].name,
+      content: <Restaurant restaurant={restaurantsSelector[restaurantId]} />,
+    }))
 );
