@@ -1,22 +1,20 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
+import { averageRatingSelector } from '../../redux/selectors';
 
-const Restaurant = ({ restaurant }) => {
-  const { name, menu, reviews } = restaurant;
-
-  const averageRating = useMemo(() => {
-    const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
-    return Math.round(total / reviews.length);
-  }, [reviews]);
-
+const Restaurant = ({ name, menu, reviews, averageRating, id }) => {
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
-    { title: 'Reviews', content: <Reviews reviews={reviews} /> },
+    {
+      title: 'Reviews',
+      content: <Reviews restaurantId={id} reviews={reviews} />,
+    },
   ];
 
   return (
@@ -30,15 +28,14 @@ const Restaurant = ({ restaurant }) => {
 };
 
 Restaurant.propTypes = {
-  restaurant: PropTypes.shape({
-    name: PropTypes.string,
-    menu: PropTypes.array,
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        rating: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
-  }).isRequired,
+  name: PropTypes.string,
+  menu: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
-export default Restaurant;
+export default connect((state, ownProps) => ({
+  name: state.restaurants[ownProps.id].name,
+  menu: state.restaurants[ownProps.id].menu,
+  reviews: state.restaurants[ownProps.id].reviews,
+  averageRating: averageRatingSelector(state, ownProps),
+}))(Restaurant);
