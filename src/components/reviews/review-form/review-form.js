@@ -5,16 +5,16 @@ import Rate from '../../rate';
 import styles from './review-form.module.css';
 import { connect } from 'react-redux';
 import Button from '../../button';
-import { addReview } from '../../../redux/actions';
+import { addReview, updateReviewAction } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 5 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, id, updateReview }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    onSubmit(values);
+    onSubmit({ values, restId: id });
     reset();
   };
 
