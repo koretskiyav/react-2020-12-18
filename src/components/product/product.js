@@ -9,10 +9,16 @@ import { decrement, increment } from '../../redux/actions';
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
+import Loader from '../loader';
+
 const Product = ({ product, amount, increment, decrement, fetchData }) => {
   useEffect(() => {
     fetchData && fetchData(product.id);
   }, []); // eslint-disable-line
+
+  // TODO: в сторе продукты уже есть, но TypeError: Cannot read property 'name' of undefined
+  // ? для предотвращения ошибки:
+  if (!product) return <Loader />;
 
   return (
     <div className={styles.product} data-id="product">
@@ -38,6 +44,8 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
   );
 };
 
+// TODO:
+// Warning: Failed prop type: The prop `product` is marked as required in `Product`, but its value is `undefined`.
 Product.propTypes = {
   product: PropTypes.shape({
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
