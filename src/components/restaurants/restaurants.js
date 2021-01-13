@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
-import { restaurantsListSelector } from '../../redux/selectors';
+import Loader from '../loader';
+import {
+  restaurantsListSelector,
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector,
+} from '../../redux/selectors';
+import { loadRestaurants } from '../../redux/actions';
 
-const Restaurants = ({ restaurants }) => {
+const Restaurants = ({ restaurants, loading, loaded, loadRestaurants }) => {
+  useEffect(() => {
+    if (!loading && !loaded) loadRestaurants();
+  }, [loading, loaded, loadRestaurants]);
+
+  if (loading || !loaded) return <Loader />;
+
   const tabs = restaurants.map((restaurant) => ({
     title: restaurant.name,
     content: <Restaurant restaurant={restaurant} />,
@@ -22,6 +34,11 @@ Restaurants.propTypes = {
   ).isRequired,
 };
 
-export default connect((state) => ({
-  restaurants: restaurantsListSelector(state),
-}))(Restaurants);
+export default connect(
+  (state) => ({
+    restaurants: restaurantsListSelector(state),
+    loading: restaurantsLoadingSelector(state),
+    loaded: restaurantsLoadedSelector(state),
+  }),
+  { loadRestaurants }
+)(Restaurants);
