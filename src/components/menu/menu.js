@@ -1,18 +1,73 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Product from '../product';
 import Basket from '../basket';
+import { createStructuredSelector } from 'reselect';
 
 import styles from './menu.module.css';
+import { connect } from 'react-redux';
+import {
+  productsLoadedSelector,
+  productsLoadingSelector,
+  restaurantsListSelector,
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector,
+} from '../../redux/selectors';
+import {
+  decrement,
+  increment,
+  loadProducts,
+  loadRestaurants,
+  remove,
+} from '../../redux/actions';
+import restaurant from '../restaurant';
+import Loader from '../loader';
+import Restaurant from '../restaurant/restaurant';
+import Tabs from '../tabs';
 
 class Menu extends React.Component {
   static propTypes = {
     menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   };
 
+  componentDidMount() {
+    this.props.loadProducts(this.props.restaurantId);
+  }
+
+  componentDidUpdate(prevProps) {
+    // if (prevProps.loading!==this.props.loading || prevProps.loaded!==this.props.loaded)//{}
+    //else
+    if (
+      !this.props.loading &&
+      !this.props.loaded &&
+      prevProps.restaurantId !== this.props.restaurantId
+    ) {
+      this.props.loadProducts(this.props.restaurantId);
+    }
+  }
+  /*
+  loadProductsIfNeeded = () => {
+    const { loadProducts, restaurantId, loading, loaded } = this.props;
+    if (!loading && !loaded) {
+      loadProducts(restaurantId);
+    }
+  };
+
+  componentDidMount() {
+    this.loadProductsIfNeeded();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.restaurantId !== this.props.restaurantId) {
+      this.loadProductsIfNeeded();
+    }
+  }
+*/
+
   state = { error: null };
 
   componentDidCatch(error) {
+    // debugger;
     this.setState({ error });
   }
 
@@ -22,6 +77,9 @@ class Menu extends React.Component {
     if (this.state.error) {
       return <p>В этом ресторане меню не доступно</p>;
     }
+
+    if (this.props.loading || !this.props.loaded) return <Loader />;
+    //return (<pre>{product}</pre>);
 
     return (
       <div className={styles.menu}>
@@ -37,5 +95,27 @@ class Menu extends React.Component {
     );
   }
 }
+/*
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  loadProducts: (id) =>dispatch(loadProducts(id))
+});
+*/
 
-export default Menu;
+export default connect(
+  (state, ownProps) => ({
+    loading: productsLoadingSelector(state, ownProps),
+    loaded: productsLoadedSelector(state, ownProps),
+  }),
+  { loadProducts }
+)(Menu);
+
+/*
+export default connect(
+  createStructuredSelector({
+    loading: productsLoadingSelector,
+    loaded: productsLoadedSelector,
+  }),
+  { loadProducts }
+)(Menu);
+
+ */

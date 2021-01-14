@@ -9,6 +9,7 @@ export default (store) => (next) => async (action) => {
 
   try {
     const data = await fetch(CallAPI).then((res) => res.json());
+    //debugger;
     next({ ...rest, type: type + SUCCESS, data });
   } catch (error) {
     next({ ...rest, type: type + FAILURE, error });

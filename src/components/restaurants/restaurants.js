@@ -14,7 +14,7 @@ import { loadRestaurants } from '../../redux/actions';
 const Restaurants = ({ restaurants, loading, loaded, loadRestaurants }) => {
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
-  }, [loading, loaded, loadRestaurants]);
+  }, [loading, loaded /*, loadRestaurants*/]);
 
   if (loading || !loaded) return <Loader />;
 
