@@ -1,15 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
-import { averageRatingSelector } from '../../redux/selectors';
+import { averageRatingSelector, productsSelector } from '../../redux/selectors';
+import { loadProducts } from '../../redux/actions';
 
-const Restaurant = ({ restaurant, averageRating }) => {
+const Restaurant = ({ restaurant, allProducts, loadProducts }) => {
   const { id, name, menu, reviews } = restaurant;
+  useEffect(() => {
+    const allProdArray = Object.keys(allProducts);
+    if (!allProdArray.includes(menu[0])) {
+      loadProducts(id);
+    }
+  }, [id, menu]);
+
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
     {
@@ -17,6 +25,19 @@ const Restaurant = ({ restaurant, averageRating }) => {
       content: <Reviews reviews={reviews} restaurantId={id} />,
     },
   ];
+  const allReviews = useSelector((state) => state.reviews.entities);
+  const filteredReviewsIdArr = Object.keys(allReviews).filter((reviewId) =>
+    reviews.includes(reviewId)
+  );
+
+  //todo fix loop
+  let averageRating = 0;
+  for (const reviewId of filteredReviewsIdArr) {
+    const review = allReviews[reviewId];
+    const rating = review.rating;
+    averageRating = averageRating + rating;
+  }
+  averageRating = averageRating / filteredReviewsIdArr.length;
 
   return (
     <div>
@@ -38,6 +59,10 @@ Restaurant.propTypes = {
   averageRating: PropTypes.number,
 };
 
-export default connect((state, props) => ({
-  averageRating: averageRatingSelector(state, props),
-}))(Restaurant);
+export default connect(
+  (state, props) => ({
+    //averageRating: averageRatingSelector(state, props),
+    allProducts: productsSelector(state, props),
+  }),
+  { loadProducts }
+)(Restaurant);

@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Review from './review';
 import ReviewForm from './review-form';
 import styles from './reviews.module.css';
 
 import { loadReviews } from '../../redux/actions';
+import {
+  reviewsIsLoadingSelector,
+  reviewsSelector,
+} from '../../redux/selectors';
+import Loader from '../loader';
 
-const Reviews = ({ reviews, restaurantId, loadReviews }) => {
+const Reviews = ({ reviews, restaurantId, loadReviews, allReviews }) => {
   useEffect(() => {
-    loadReviews(restaurantId);
+    const allReviewsArr = Object.keys(allReviews);
+    if (!allReviewsArr.includes(reviews[0])) {
+      loadReviews(restaurantId);
+    }
   }, [loadReviews, restaurantId]);
 
   return (
@@ -27,4 +35,9 @@ Reviews.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
-export default connect(null, { loadReviews })(Reviews);
+export default connect(
+  (state, props) => ({
+    allReviews: reviewsSelector(state).entities,
+  }),
+  { loadReviews }
+)(Reviews);
