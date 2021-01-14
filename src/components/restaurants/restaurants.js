@@ -9,9 +9,18 @@ import {
   restaurantsLoadedSelector,
   restaurantsLoadingSelector,
 } from '../../redux/selectors';
-import { loadRestaurants } from '../../redux/actions';
+import { loadRestaurants, loadUsers } from '../../redux/actions';
 
-const Restaurants = ({ restaurants, loading, loaded, loadRestaurants }) => {
+const Restaurants = ({
+  restaurants,
+  loading,
+  loaded,
+  loadRestaurants,
+  loadUsers,
+}) => {
+  useEffect(() => {
+    loadUsers();
+  }, []);
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
   }, [loading, loaded, loadRestaurants]);
@@ -22,7 +31,6 @@ const Restaurants = ({ restaurants, loading, loaded, loadRestaurants }) => {
     title: restaurant.name,
     content: <Restaurant restaurant={restaurant} />,
   }));
-
   return <Tabs tabs={tabs} />;
 };
 
@@ -40,5 +48,5 @@ export default connect(
     loading: restaurantsLoadingSelector(state),
     loaded: restaurantsLoadedSelector(state),
   }),
-  { loadRestaurants }
+  { loadRestaurants, loadUsers }
 )(Restaurants);

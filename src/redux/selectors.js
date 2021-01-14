@@ -3,9 +3,11 @@ import { getById } from './utils';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
 const orderSelector = (state) => state.order;
-const productsSelector = (state) => state.products;
-const reviewsSelector = (state) => state.reviews;
-const usersSelector = (state) => state.users;
+export const productsSelector = (state) => state.products.entities;
+export const reviewsSelector = (state) => state.reviews;
+export const reviewsIsLoadingSelector = (state) => state.reviews.loading;
+
+export const usersSelector = (state) => state.users.entities;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;

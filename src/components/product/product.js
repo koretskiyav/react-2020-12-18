@@ -4,16 +4,26 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import styles from './product.module.css';
 
-import { decrement, increment } from '../../redux/actions';
+import { decrement, increment, loadProduct } from '../../redux/actions';
 
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
+import Loader from '../loader';
 
-const Product = ({ product, amount, increment, decrement, fetchData }) => {
+const Product = ({
+  id,
+  product,
+  amount,
+  increment,
+  decrement,
+  fetchData,
+  loadProduct,
+}) => {
   useEffect(() => {
     fetchData && fetchData(product.id);
   }, []); // eslint-disable-line
 
+  if (!product) return <Loader />;
   return (
     <div className={styles.product} data-id="product">
       <div className={styles.content}>

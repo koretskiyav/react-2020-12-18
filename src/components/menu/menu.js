@@ -18,7 +18,6 @@ class Menu extends React.Component {
 
   render() {
     const { menu } = this.props;
-
     if (this.state.error) {
       return <p>В этом ресторане меню не доступно</p>;
     }
