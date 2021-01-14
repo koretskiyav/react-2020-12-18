@@ -20,9 +20,7 @@ const Restaurant = ({ restaurant, averageRating }) => {
 
   return (
     <div>
-      <Banner heading={name}>
-        <Rate value={averageRating} />
-      </Banner>
+      <Banner heading={name}>{/* <Rate value={averageRating} /> */}</Banner>
       <Tabs tabs={tabs} />
     </div>
   );
@@ -39,5 +37,5 @@ Restaurant.propTypes = {
 };
 
 export default connect((state, props) => ({
-  averageRating: averageRatingSelector(state, props),
+  // averageRating: averageRatingSelector(state, props),
 }))(Restaurant);

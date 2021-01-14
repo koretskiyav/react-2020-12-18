@@ -12,8 +12,6 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, data, error } = action;
 
-  console.log(data); //почему четыре раза вызывается?
-
   switch (type) {
     case LOAD_PRODUCTS + REQUEST:
       return {

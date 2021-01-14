@@ -10,6 +10,9 @@ import {
   usersListSelector,
   usersLoadingSelector,
   usersLoadedSelector,
+  reviewsListSelector,
+  reviewsLoadingSelector,
+  reviewsLoadedSelector,
 } from '../../redux/selectors';
 import Loader from '../loader';
 
@@ -22,18 +25,18 @@ const Reviews = ({
   loaded,
 }) => {
   useEffect(() => {
+    loadUsers();
     if (!loading && !loaded) {
       loadReviews(restaurantId);
-      loadUsers();
     }
-  }, [loading, loaded, loadReviews, loadUsers, restaurantId]);
+  }, [loading, loaded, loadUsers, loadReviews, restaurantId]);
 
   if (loading || !loaded) return <Loader />;
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
+      {reviews.map((review) => (
+        <Review key={review.id} id={review.id} />
       ))}
       <ReviewForm restaurantId={restaurantId} />
     </div>
@@ -42,14 +45,19 @@ const Reviews = ({
 
 Reviews.propTypes = {
   restaurantId: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default connect(
-  (state) => ({
+  ((state) => ({
     users: usersListSelector(state),
     loading: usersLoadingSelector(state),
     loaded: usersLoadedSelector(state),
   }),
+  (state) => ({
+    reviews: reviewsListSelector(state),
+    loading: reviewsLoadingSelector(state),
+    loaded: reviewsLoadedSelector(state),
+  })),
   { loadReviews, loadUsers }
 )(Reviews);
