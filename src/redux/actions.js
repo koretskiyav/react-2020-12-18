@@ -33,13 +33,14 @@ export const loadProducts = (restId) => ({
 });
 
 export const loadReviews = (restaurantId) => async (dispatch) => {
-  dispatch({ type: LOAD_REVIEWS + REQUEST });
+  //debugger;
+  dispatch({ type: LOAD_REVIEWS + REQUEST, restaurantId });
 
   try {
     const data = await fetch(`/api/reviews?id=${restaurantId}`).then((res) =>
       res.json()
     );
-    dispatch({ type: LOAD_REVIEWS + SUCCESS, data });
+    dispatch({ type: LOAD_REVIEWS + SUCCESS, data, restaurantId });
   } catch (error) {
     dispatch({ type: LOAD_REVIEWS + FAILURE, error });
   }

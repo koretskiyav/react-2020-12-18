@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Product from '../product';
 import Basket from '../basket';
-import { createStructuredSelector } from 'reselect';
 
 import styles from './menu.module.css';
 import { connect } from 'react-redux';
@@ -56,7 +55,7 @@ class Menu extends React.Component {
       return <p>В этом ресторане меню не доступно</p>;
     }
 
-    if (this.props.loading || !this.props.loaded) return <Loader />;
+    if (/*this.props.loading ||*/ !this.props.loaded) return <Loader />;
     //return (<pre>{product}</pre>);
 
     return (
@@ -73,11 +72,6 @@ class Menu extends React.Component {
     );
   }
 }
-/*
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadProducts: (id) =>dispatch(loadProducts(id))
-});
-*/
 
 export default connect(
   (state, ownProps) => ({
@@ -86,14 +80,3 @@ export default connect(
   }),
   { loadProducts }
 )(Menu);
-
-/*
-export default connect(
-  createStructuredSelector({
-    loading: productsLoadingSelector,
-    loaded: productsLoadedSelector,
-  }),
-  { loadProducts }
-)(Menu);
-
- */

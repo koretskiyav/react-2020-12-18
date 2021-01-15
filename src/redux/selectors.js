@@ -4,7 +4,7 @@ import { getById } from './utils';
 const restaurantsSelector = (state) => state.restaurants.entities;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products.entities;
-const reviewsSelector = (state) => state.reviews;
+const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
@@ -13,6 +13,12 @@ export const productsLoadingSelector = (state, props) =>
   state.products.loading[props.restaurantId];
 export const productsLoadedSelector = (state, props) =>
   state.products.loaded[props.restaurantId];
+
+export const reviewsLoadingSelector = (state, props) =>
+  state.reviews.loading[props.restaurantId];
+
+export const reviewsLoadedSelector = (state, props) =>
+  state.reviews.loaded[props.restaurantId];
 
 export const restaurantsListSelector = createSelector(
   restaurantsSelector,

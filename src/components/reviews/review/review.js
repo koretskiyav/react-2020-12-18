@@ -6,7 +6,7 @@ import Rate from '../../rate';
 import styles from './review.module.css';
 import { reviewWitUserSelector } from '../../../redux/selectors';
 
-const Review = ({ user, text, rating }) => (
+const Review = ({ user, text, rating, id, userId }) => (
   <div className={styles.review} data-id="review">
     <div className={styles.content}>
       <div>
@@ -24,15 +24,7 @@ const Review = ({ user, text, rating }) => (
   </div>
 );
 
-Review.propTypes = {
-  user: PropTypes.string,
-  text: PropTypes.string,
-  rating: PropTypes.number.isRequired,
-};
-
-Review.defaultProps = {
-  user: 'Anonymous',
-};
+//export default Review;
 
 export default connect((state, props) => ({
   ...reviewWitUserSelector(state, props),
