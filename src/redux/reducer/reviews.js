@@ -1,17 +1,56 @@
-import { ADD_REVIEW } from '../constants';
-import { normalizedReviews } from '../../fixtures';
+import produce from 'immer';
+import {
+  ADD_REVIEW,
+  REQUEST,
+  SUCCESS,
+  FAILURE,
+  LOAD_REVIEWS,
+} from '../constants';
 import { arrToMap } from '../utils';
 
-export default (state = arrToMap(normalizedReviews), action) => {
-  const { type, payload, reviewId, userId } = action;
+const initialState = {
+  entities: {},
+  loading: false,
+  loaded: false,
+  error: null,
+};
+
+export default (state = initialState, action) => {
+  const { type, payload, reviewId, userId, data, error } = action;
 
   switch (type) {
-    case ADD_REVIEW:
-      const { text, rating } = payload.review;
+    case LOAD_REVIEWS + REQUEST:
       return {
         ...state,
-        [reviewId]: { id: reviewId, userId, text, rating },
+        loading: true,
+        error: null,
       };
+    case LOAD_REVIEWS + SUCCESS:
+      return {
+        ...state,
+        entities: arrToMap(data),
+        loading: false,
+        loaded: true,
+      };
+    case LOAD_REVIEWS + FAILURE:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error,
+      };
+
+    case ADD_REVIEW:
+      const { text, rating } = payload.review;
+      return produce(state, (draft) => {
+        draft.entities[reviewId] = {
+          id: reviewId,
+          userId,
+          text,
+          rating,
+        };
+      });
+
     default:
       return state;
   }
