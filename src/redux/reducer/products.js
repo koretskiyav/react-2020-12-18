@@ -16,7 +16,7 @@ export default (state = initialState, action) =>
 
     switch (type) {
       case LOAD_PRODUCTS + REQUEST: {
-        debugger;
+        //  debugger;
         draft.loading[restaurantId] = true;
         break;
       }

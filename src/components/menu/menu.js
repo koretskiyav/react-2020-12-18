@@ -22,8 +22,6 @@ import {
 } from '../../redux/actions';
 import restaurant from '../restaurant';
 import Loader from '../loader';
-import Restaurant from '../restaurant/restaurant';
-import Tabs from '../tabs';
 
 class Menu extends React.Component {
   static propTypes = {
@@ -35,8 +33,6 @@ class Menu extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (prevProps.loading!==this.props.loading || prevProps.loaded!==this.props.loaded)//{}
-    //else
     if (
       !this.props.loading &&
       !this.props.loaded &&
@@ -45,24 +41,6 @@ class Menu extends React.Component {
       this.props.loadProducts(this.props.restaurantId);
     }
   }
-  /*
-  loadProductsIfNeeded = () => {
-    const { loadProducts, restaurantId, loading, loaded } = this.props;
-    if (!loading && !loaded) {
-      loadProducts(restaurantId);
-    }
-  };
-
-  componentDidMount() {
-    this.loadProductsIfNeeded();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.restaurantId !== this.props.restaurantId) {
-      this.loadProductsIfNeeded();
-    }
-  }
-*/
 
   state = { error: null };
 
