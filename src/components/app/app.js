@@ -10,7 +10,7 @@ export default class App extends PureComponent {
       <div>
         <Header />
         <Route path="/checkout" component={Basket} />
-        <Route path="/restaurants" component={Restaurants} />
+        <Route path="/restaurants/:restId" component={Restaurants} />
       </div>
     );
   }
