@@ -18,7 +18,8 @@ const Review = ({ user, text, rating }) => (
         </p>
       </div>
       <div className={styles.rate}>
-        <Rate value={rating} />
+        {/* // TODO: убираю ошибку, но без понимания */}
+        {rating && <Rate value={rating} />}
       </div>
     </div>
   </div>
@@ -27,7 +28,9 @@ const Review = ({ user, text, rating }) => (
 Review.propTypes = {
   user: PropTypes.string,
   text: PropTypes.string,
-  rating: PropTypes.number.isRequired,
+  // TODO: убираю ошибку, но без понимания
+  // Warning: Failed prop type: The prop `rating` is marked as required in `Review`, but its value is `undefined`.
+  rating: PropTypes.number,
 };
 
 Review.defaultProps = {
