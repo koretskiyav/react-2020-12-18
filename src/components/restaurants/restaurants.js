@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
@@ -35,10 +36,10 @@ Restaurants.propTypes = {
 };
 
 export default connect(
-  (state) => ({
-    restaurants: restaurantsListSelector(state),
-    loading: restaurantsLoadingSelector(state),
-    loaded: restaurantsLoadedSelector(state),
+  createStructuredSelector({
+    restaurants: restaurantsListSelector,
+    loading: restaurantsLoadingSelector,
+    loaded: restaurantsLoadedSelector,
   }),
   { loadRestaurants }
 )(Restaurants);
