@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
+import { Route, Switch } from 'react-router-dom';
 
 import Menu from '../menu';
 import Reviews from '../reviews';
@@ -13,10 +14,15 @@ import { averageRatingSelector } from '../../redux/selectors';
 const Restaurant = ({ restaurant, averageRating }) => {
   const { id, name, menu, reviews } = restaurant;
   const tabs = [
-    { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
+    {
+      title: 'Menu',
+      target: `/restaurants/${id}`,
+      exact: true,
+    },
     {
       title: 'Reviews',
-      content: <Reviews reviews={reviews} restaurantId={id} />,
+      target: `/restaurants/${id}/reviews`,
+      exact: true,
     },
   ];
 
@@ -26,6 +32,22 @@ const Restaurant = ({ restaurant, averageRating }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
       <Tabs tabs={tabs} />
+      <Switch>
+        <Route
+          exact
+          path={`/restaurants/${id}/reviews`}
+          render={(props) => (
+            <Reviews {...props} reviews={reviews} restaurantId={id} />
+          )}
+        />
+        <Route
+          exact
+          path={`/restaurants/${id}`}
+          render={(props) => (
+            <Menu {...props} menu={menu} restaurantId={id} />
+          )}
+        />
+      </Switch>
     </div>
   );
 };
