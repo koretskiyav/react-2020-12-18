@@ -60,6 +60,15 @@
   display: inline-block;
   text-decoration: none;
   color: var(--black);
+  transition: transform 150ms ease-out 0s;
+}
+
+.name > a:hover {
+  transform: translateY(-1px);
+}
+
+.active {
+  font-weight: bold;
 }
 
 .info {
