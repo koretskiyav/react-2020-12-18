@@ -9,9 +9,10 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 import { averageRatingSelector } from '../../redux/selectors';
+import { useParams } from 'react-router-dom';
+const Restaurant = ({ restaurant, averageRating }) => {
+  const { typeBlock } = useParams();
 
-const Restaurant = ({ restaurant, averageRating, typeBlock }) => {
-  //debugger;
   const { id, name, menu, reviews } = restaurant;
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
