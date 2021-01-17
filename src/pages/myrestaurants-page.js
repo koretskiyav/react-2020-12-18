@@ -12,7 +12,7 @@ import {
 } from '../redux/selectors';
 import { loadRestaurants } from '../redux/actions';
 
-function RestaurantsPage({
+function MyRestaurantsPage({
   restaurants,
   loading,
   loaded,
@@ -24,22 +24,13 @@ function RestaurantsPage({
   }, [loading, loaded, loadRestaurants]);
 
   if (loading || !loaded) return <Loader />;
-
-  /*if (match.isExact)*/ {
-    return (
-      <div>
-        <h3>Restorants page</h3>
-        <div>select page:</div>
-        {restaurants.map(({ id, name }) => (
-          <p key={id}>
-            <Link to={`/restaurants/${id}/menu`}>{name}</Link>
-          </p>
-        ))}
-      </div>
+  else {
+    const { restId } = match.params;
+    const restaurant = restaurants.find(
+      (restaurant) => restaurant.id === restId
     );
+    return <Restaurants restaurants={restaurants} restaurant={restaurant} />;
   }
-
-  //return <Route path="/restaurants/:restId" component={Restaurants} />;
 }
 
 export default connect(
@@ -49,4 +40,4 @@ export default connect(
     loaded: restaurantsLoadedSelector,
   }),
   { loadRestaurants }
-)(RestaurantsPage);
+)(MyRestaurantsPage);

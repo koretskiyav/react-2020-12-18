@@ -9,23 +9,34 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 import { averageRatingSelector } from '../../redux/selectors';
-
+import { Link, useParams } from 'react-router-dom';
+import styles from '../tabs/tabs.module.css';
+import cn from 'classnames';
 const Restaurant = ({ restaurant, averageRating }) => {
+  const { typeBlock } = useParams();
+
   const { id, name, menu, reviews } = restaurant;
   const tabs = [
-    { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
     {
-      title: 'Reviews',
+      content: <Menu menu={menu} restaurantId={id} />,
+      link: <Link to={`/restaurants/${id}/menu`}>Menu</Link>,
+    },
+    {
       content: <Reviews reviews={reviews} restaurantId={id} />,
+      link: <Link to={`/restaurants/${id}/reviews`}>Reviews</Link>,
     },
   ];
+
+  const initTab = typeBlock === 'menu' ? 0 : 1;
+  console.log('initTab', initTab);
 
   return (
     <div>
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
-      <Tabs tabs={tabs} />
+
+      <Tabs tabs={tabs} initTab={initTab} />
     </div>
   );
 };

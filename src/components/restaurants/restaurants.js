@@ -1,17 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
-import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
-import { restaurantsListSelector } from '../../redux/selectors';
-
 import styles from './restaurants.module.css';
 
-const Restaurants = ({ restaurants, match }) => {
-  const { restId } = match.params;
-  const restaurant = restaurants.find((restaurant) => restaurant.id === restId);
-
+const Restaurants = ({ restaurants, restaurant }) => {
   return (
     <>
       <div className={styles.tabs}>
@@ -19,7 +11,7 @@ const Restaurants = ({ restaurants, match }) => {
           <NavLink
             key={id}
             className={styles.tab}
-            to={`/restaurants/${id}`}
+            to={`/restaurants/${id}/menu`}
             activeClassName={styles.active}
           >
             {name}
@@ -31,16 +23,4 @@ const Restaurants = ({ restaurants, match }) => {
   );
 };
 
-Restaurants.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-};
-
-export default connect(
-  createStructuredSelector({
-    restaurants: restaurantsListSelector,
-  })
-)(Restaurants);
+export default Restaurants;

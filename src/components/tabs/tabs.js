@@ -4,29 +4,27 @@ import cn from 'classnames';
 
 import styles from './tabs.module.css';
 
-const Tabs = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const { content } = tabs[activeTab];
+const Tabs = ({ tabs, initTab }) => {
+  const { content, link } = tabs[initTab];
 
   return (
     <>
       <div className={styles.tabs}>
-        {tabs.map(({ title }, index) => (
+        {tabs.map(({ link }, index) => (
           <span
-            key={title}
-            className={cn(styles.tab, { [styles.active]: index === activeTab })}
-            onClick={() => setActiveTab(index)}
+            key={index}
+            className={cn(styles.tab, { [styles.active]: index === initTab })}
+            /*            onClick={() => history.push(link)} */
           >
-            {title}
+            {link}
           </span>
         ))}
       </div>
-      {content}
+      <div>{content}</div>
     </>
   );
 };
-
+/*
 Tabs.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
@@ -35,5 +33,5 @@ Tabs.propTypes = {
     }).isRequired
   ).isRequired,
 };
-
+*/
 export default Tabs;
