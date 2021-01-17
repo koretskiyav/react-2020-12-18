@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
@@ -9,10 +9,8 @@ import { decrement, increment } from '../../redux/actions';
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
-const Product = ({ product, amount, increment, decrement, fetchData }) => {
-  useEffect(() => {
-    fetchData && fetchData(product.id);
-  }, []); // eslint-disable-line
+const Product = ({ product, amount, increment, decrement }) => {
+  if (!product) return null;
 
   return (
     <div className={styles.product} data-id="product">
@@ -43,8 +41,7 @@ Product.propTypes = {
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     name: PropTypes.string,
     price: PropTypes.number,
-  }).isRequired,
-  fetchData: PropTypes.func,
+  }),
   // from HOC counter
   amount: PropTypes.number,
   decrement: PropTypes.func,
