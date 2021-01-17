@@ -10,7 +10,8 @@ import Rate from '../rate';
 import Tabs from '../tabs';
 import { averageRatingSelector } from '../../redux/selectors';
 
-const Restaurant = ({ restaurant, averageRating }) => {
+const Restaurant = ({ restaurant, averageRating, typeBlock }) => {
+  //debugger;
   const { id, name, menu, reviews } = restaurant;
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
@@ -20,12 +21,14 @@ const Restaurant = ({ restaurant, averageRating }) => {
     },
   ];
 
+  const initTab = typeBlock === 'menu' ? 0 : 1;
   return (
     <div>
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
-      <Tabs tabs={tabs} />
+
+      <Tabs tabs={tabs} initTab={initTab} />
     </div>
   );
 };

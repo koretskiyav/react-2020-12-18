@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import RestaurantsPage from '../../pages/restaurants-page';
 import Header from '../header';
 import Basket from '../basket';
+import Restaurants from '../restaurants/restaurants';
 
 export default class App extends PureComponent {
   render() {
@@ -12,7 +13,11 @@ export default class App extends PureComponent {
         <Switch>
           <Route path="/" exact component={() => 'Main page'} />
           <Route path="/checkout" component={Basket} />
-          <Route path="/restaurants" component={RestaurantsPage} />
+          <Route path="/restaurants" exact component={RestaurantsPage} />
+          <Route
+            path="/restaurants/:restId/:typeBlock"
+            component={Restaurants}
+          />
           <Route path="/" component={() => '404 - Not found'} />
         </Switch>
       </div>

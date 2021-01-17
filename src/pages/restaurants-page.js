@@ -25,20 +25,21 @@ function RestaurantsPage({
 
   if (loading || !loaded) return <Loader />;
 
-  if (match.isExact) {
+  /*if (match.isExact)*/ {
     return (
       <div>
+        <h3>Restorants page</h3>
         <div>select page:</div>
         {restaurants.map(({ id, name }) => (
           <p key={id}>
-            <Link to={`/restaurants/${id}`}>{name}</Link>
+            <Link to={`/restaurants/${id}/menu`}>{name}</Link>
           </p>
         ))}
       </div>
     );
   }
 
-  return <Route path="/restaurants/:restId" component={Restaurants} />;
+  //return <Route path="/restaurants/:restId" component={Restaurants} />;
 }
 
 export default connect(

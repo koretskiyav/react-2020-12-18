@@ -4,6 +4,8 @@ import cn from 'classnames';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
+import { restaurantByProductId } from '../../../redux/selectors';
+import { Link } from 'react-router-dom';
 
 function BasketItem({
   product,
@@ -12,11 +14,12 @@ function BasketItem({
   increment,
   decrement,
   remove,
+  restaurantId,
 }) {
   return (
     <div className={styles.basketItem}>
       <div className={styles.name}>
-        <span>{product.name}</span>
+        <Link to={`/restaurants/${restaurantId}/menu`}>{product.name}</Link>
       </div>
       <div className={styles.info}>
         <div className={styles.counter}>
@@ -37,4 +40,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   remove: () => dispatch(remove(ownProps.product.id)),
 });
 
-export default connect(null, mapDispatchToProps)(BasketItem);
+export default connect(
+  (state, ownProps) => ({
+    restaurantId: restaurantByProductId(state, ownProps),
+  }),
+  mapDispatchToProps
+)(BasketItem);

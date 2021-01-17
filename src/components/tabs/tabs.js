@@ -4,8 +4,8 @@ import cn from 'classnames';
 
 import styles from './tabs.module.css';
 
-const Tabs = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(0);
+const Tabs = ({ tabs, initTab }) => {
+  const [activeTab, setActiveTab] = useState(initTab);
 
   const { content } = tabs[activeTab];
 
