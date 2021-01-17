@@ -1,0 +1,14 @@
+.nav {
+    height: auto;
+    text-align: center;
+    padding: 12px;
+    background-color: var(--grey);
+}
+
+.item {
+    padding: 4px 12px;
+}
+
+.item.active {
+    border-bottom: 1px solid var(--black);
+}
