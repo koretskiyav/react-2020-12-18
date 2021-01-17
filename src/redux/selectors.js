@@ -35,7 +35,8 @@ const reviewSelector = getById(reviewsSelector);
 export const orderProductsSelector = createSelector(
   productsSelector,
   orderSelector,
-  (products, order) =>
+  restaurantsListSelector,
+  (products, order, restaurants) =>
     Object.keys(order)
       .filter((productId) => order[productId] > 0)
       .map((productId) => products[productId])
@@ -44,6 +45,15 @@ export const orderProductsSelector = createSelector(
         amount: order[product.id],
         subtotal: order[product.id] * product.price,
       }))
+      .map((orderProduct) => {
+        const restaurant = restaurants.find(restaurant =>
+          undefined !== restaurant.menu.find(item => item === orderProduct.product.id)
+        )
+        return {
+          ...orderProduct,
+          restaurantId: restaurant.id,
+        }
+      })
 );
 
 export const totalSelector = createSelector(
