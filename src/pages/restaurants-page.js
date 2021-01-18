@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Restaurants from '../components/restaurants';
 import Loader from '../components/loader';
@@ -11,6 +11,7 @@ import {
   restaurantsLoadingSelector,
 } from '../redux/selectors';
 import { loadRestaurants } from '../redux/actions';
+import RestaurantPage from './restaurant-page';
 
 function RestaurantsPage({
   restaurants,
@@ -38,7 +39,12 @@ function RestaurantsPage({
     );
   }
 
-  return <Route path="/restaurants/:restId" component={Restaurants} />;
+  return (
+    <Switch>
+      <Route path="/restaurants/:restId" exact component={Restaurants} />;
+      <Route path="/restaurants/:restId/:tab" component={RestaurantPage} />;
+    </Switch>
+  );
 }
 
 export default connect(
