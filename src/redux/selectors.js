@@ -28,10 +28,12 @@ export const restaurantsListSelector = createSelector(
   Object.values
 );
 
-export const restaurantIdSelector = (state, props) =>
+export const restaurantIdByProductIdSelector = (state, props) =>
   Object.values(restaurantsSelector(state)).find((rest) =>
     rest.menu.includes(props.product.id)
   ).id;
+
+export const restaurantSelector = getById(restaurantsSelector);
 
 export const reviewsListSelector = createSelector(
   reviewsSelector,

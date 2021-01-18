@@ -6,7 +6,7 @@ import Button from '../../button';
 import styles from './basket-item.module.css';
 import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { restaurantIdSelector } from '../../../redux/selectors';
+import { restaurantIdByProductIdSelector } from '../../../redux/selectors';
 
 function BasketItem({
   product,
@@ -37,7 +37,7 @@ function BasketItem({
   );
 }
 const mapStateToProps = createStructuredSelector({
-  restaurantId: restaurantIdSelector,
+  restaurantId: restaurantIdByProductIdSelector,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
