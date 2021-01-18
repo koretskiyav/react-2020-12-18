@@ -19,7 +19,7 @@ const Restaurants = ({ restaurants, match }) => {
           <NavLink
             key={id}
             className={styles.tab}
-            to={`/restaurants/${id}`}
+            to={`/restaurants/${id}/menu`}
             activeClassName={styles.active}
           >
             {name}

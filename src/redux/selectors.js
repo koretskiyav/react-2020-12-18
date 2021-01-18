@@ -35,7 +35,8 @@ const reviewSelector = getById(reviewsSelector);
 export const orderProductsSelector = createSelector(
   productsSelector,
   orderSelector,
-  (products, order) =>
+  restaurantsSelector,
+  (products, order, restaurants) =>
     Object.keys(order)
       .filter((productId) => order[productId] > 0)
       .map((productId) => products[productId])
@@ -43,6 +44,12 @@ export const orderProductsSelector = createSelector(
         product,
         amount: order[product.id],
         subtotal: order[product.id] * product.price,
+        restaurantId:
+          (
+            Object.values(restaurants).find((restaurant) =>
+              restaurant.menu.includes(product.id)
+            ) || {}
+          )?.id || '',
       }))
 );
 

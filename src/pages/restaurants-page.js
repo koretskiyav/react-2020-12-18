@@ -31,7 +31,7 @@ function RestaurantsPage({
         <div>select page:</div>
         {restaurants.map(({ id, name }) => (
           <p key={id}>
-            <Link to={`/restaurants/${id}`}>{name}</Link>
+            <Link to={`/restaurants/${id}/menu`}>{name}</Link>
           </p>
         ))}
       </div>
