@@ -10,6 +10,8 @@ const Restaurants = ({ restaurants, match }) => {
   const { restId } = match.params;
   const restaurant = restaurants.find((restaurant) => restaurant.id === restId);
 
+  // TODO проверку на несуществующий ресторант тут
+
   const tabs = restaurants.map(({ id, name }) => ({
     title: name,
     to: `/restaurants/${id}`,
