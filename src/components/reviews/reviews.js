@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import Review from './review';
 import ReviewForm from './review-form';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from './reviews.module.css';
 
 import { loadReviews, loadUsers } from '../../redux/actions';
@@ -31,9 +32,17 @@ const Reviews = ({
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
-      ))}
+      <TransitionGroup>
+        {reviews.map((id) => (
+          <CSSTransition
+            key={id}
+            timeout={500}
+            classNames={{ ...styles }}
+          >
+            <Review id={id} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
       <ReviewForm restaurantId={restaurantId} />
     </div>
   );
