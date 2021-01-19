@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 
@@ -24,14 +24,21 @@ const Restaurant = ({ restaurant, averageRating }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
       <Tabs tabs={tabs} />
-      <Route
-        path="/restaurants/:restId/menu"
-        render={() => <Menu menu={menu} restaurantId={id} />}
-      />
-      <Route
-        path="/restaurants/:restId/reviews"
-        render={() => <Reviews reviews={reviews} restaurantId={id} />}
-      />
+      <Switch>
+        <Route
+          path="/restaurants/:restId/menu"
+          render={() => <Menu menu={menu} restaurantId={id} />}
+        />
+        <Route
+          path="/restaurants/:restId/reviews"
+          render={() => <Reviews reviews={reviews} restaurantId={id} />}
+        />
+        <Redirect
+          exact
+          from="/restaurants/:restId"
+          to={`/restaurants/${id}/menu`}
+        />
+      </Switch>
     </div>
   );
 };
