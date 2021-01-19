@@ -12,7 +12,7 @@ const Restaurants = ({ restaurants, match }) => {
 
   const tabs = restaurants.map(({ id, name }) => ({
     title: name,
-    to: `/restaurants/${id}/menu`,
+    to: `/restaurants/${id}`,
   }));
 
   return (
