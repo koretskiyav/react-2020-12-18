@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { getById } from './utils';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
-const orderSelector = (state) => state.order;
+const orderSelector = (state) => state.order.entities;
 const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
