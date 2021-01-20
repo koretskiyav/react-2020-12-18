@@ -61,6 +61,14 @@ export const orderProductsSelector = createSelector(
       }))
 );
 
+export const orderSendingSelector = (state) => state.order.sending;
+export const orderErrorSelector = (state) => state.order.error;
+
+export const orderListSelector = createSelector(
+  orderSelector,
+  order => Object.entries(order).map(([id, amount]) => ({ id, amount }))
+);
+
 export const totalSelector = createSelector(
   orderProductsSelector,
   (orderProducts) =>

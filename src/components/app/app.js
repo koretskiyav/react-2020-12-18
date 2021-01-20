@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import RestaurantsPage from '../../pages/restaurants-page';
+import SuccessPage from '../../pages/success-page';
+import ErrorPage from '../../pages/error-page';
 import Header from '../header';
 import Basket from '../basket';
 import { UserProvider } from '../../contexts/user-context';
@@ -20,7 +22,8 @@ const App = () => {
           <Switch>
             <Route path="/checkout" component={Basket} />
             <Route path="/restaurants" component={RestaurantsPage} />
-            <Route path="/error" component={() => <h1>Error Page</h1>} />
+            <Route path="/success" component={SuccessPage} />
+            <Route path="/error" component={ErrorPage} />
             <Redirect to="/restaurants" />
           </Switch>
         </CurrencyProvider>

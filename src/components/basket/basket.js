@@ -11,10 +11,11 @@ import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
 import { CurrencyExchange } from '../currency';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import { orderProductsSelector, totalSelector, orderSendingSelector } from '../../redux/selectors';
+import { postOrder } from '../../redux/actions';
 import { UserConsumer } from '../../contexts/user-context';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, match }) {
   // const { name } = useContext(userContext);
 
   if (!total) {
@@ -58,18 +59,28 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           </p>
         </div>
       </div>
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
-        </Button>
-      </Link>
+      {
+        (match && match.path === "/checkout")
+          ?
+          <Button primary block onClick={postOrder}>
+            checkoutButton
+          </Button>
+          :
+          <Link to="/checkout">
+            <Button primary block>
+              checkout
+            </Button>
+          </Link>
+      }
     </div>
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  total: totalSelector,
-  orderProducts: orderProductsSelector,
-});
-
-export default connect(mapStateToProps)(Basket);
+export default connect(
+  createStructuredSelector({
+    total: totalSelector,
+    orderProducts: orderProductsSelector,
+    sending: orderSendingSelector,
+  }),
+  { postOrder }
+)(Basket);

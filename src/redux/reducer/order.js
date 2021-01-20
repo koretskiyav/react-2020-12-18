@@ -1,16 +1,42 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import {
+  DECREMENT,
+  INCREMENT,
+  REMOVE,
+  POST_ORDER,
+  FAILURE,
+  REQUEST,
+  SUCCESS,
+} from '../constants';
 
 const initialState = {
   entities: {},
   sending: false,
-  sended: false,
   error: null,
 };
 
 // { [productId]: amount }
 export default (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, error } = action;
   switch (type) {
+    case POST_ORDER + REQUEST:
+      return {
+        ...state,
+        sending: true,
+        error: null,
+      };
+    case POST_ORDER + SUCCESS:
+      return {
+        ...state,
+        entities: {},
+        sending: false,
+      };
+    case POST_ORDER + FAILURE:
+      return {
+        ...state,
+        sending: false,
+        error: error,
+      };
+
     case INCREMENT:
       return {
         ...state,
