@@ -13,13 +13,7 @@ import {
 import { loadRestaurants } from '../redux/actions';
 import RestaurantPage from './restaurant-page';
 
-function RestaurantsPage({
-  restaurants,
-  loading,
-  loaded,
-  loadRestaurants,
-  match,
-}) {
+function RestaurantsPage({ loading, loaded, loadRestaurants, match }) {
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
   }, [loading, loaded, loadRestaurants]);
@@ -28,14 +22,10 @@ function RestaurantsPage({
 
   if (match.isExact) {
     return (
-      <div>
-        <div>select page:</div>
-        {restaurants.map(({ id, name }) => (
-          <p key={id}>
-            <Link to={`/restaurants/${id}`}>{name}</Link>
-          </p>
-        ))}
-      </div>
+      <>
+        <Restaurants match={match} />
+        <h2 style={{ textAlign: 'center' }}>Select restaurant</h2>
+      </>
     );
   }
 

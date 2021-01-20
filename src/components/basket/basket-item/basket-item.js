@@ -1,28 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
-import { NavLink } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
-import { restaurantIdByProductIdSelector } from '../../../redux/selectors';
 
 function BasketItem({
   product,
   amount,
   subtotal,
+  restaurantId,
   increment,
   decrement,
   remove,
-  restaurantId,
 }) {
   return (
     <div className={styles.basketItem}>
       <div className={styles.name}>
-        <span>
-          <NavLink to={`/restaurants/${restaurantId}`}>{product.name}</NavLink>
-        </span>
+        <Link to={`/restaurants/${restaurantId}/menu`}>
+          <span>{product.name}</span>
+        </Link>
       </div>
       <div className={styles.info}>
         <div className={styles.counter}>
@@ -36,9 +34,6 @@ function BasketItem({
     </div>
   );
 }
-const mapStateToProps = createStructuredSelector({
-  restaurantId: restaurantIdByProductIdSelector,
-});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   increment: () => dispatch(increment(ownProps.product.id)),
@@ -46,4 +41,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   remove: () => dispatch(remove(ownProps.product.id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BasketItem);
+export default connect(null, mapDispatchToProps)(BasketItem);
