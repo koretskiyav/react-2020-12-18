@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
+import { CurrencyExchange } from '../../currency';
 import styles from './basket-item.module.css';
 
 function BasketItem({
@@ -28,7 +29,9 @@ function BasketItem({
           <span className={styles.count}>{amount}</span>
           <Button onClick={increment} icon="plus" secondary small />
         </div>
-        <p className={cn(styles.count, styles.price)}>{subtotal} $</p>
+        <p className={cn(styles.count, styles.price)}>
+          <CurrencyExchange price={subtotal} />
+        </p>
         <Button onClick={remove} icon="delete" secondary small />
       </div>
     </div>
