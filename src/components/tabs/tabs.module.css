@@ -11,6 +11,8 @@
 
 .tab {
   padding: 4px 12px;
+  color: var(--black);
+  text-decoration: none;
 }
 
 .tab.active {

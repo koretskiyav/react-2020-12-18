@@ -1,3 +1,4 @@
+import { replace } from 'connected-react-router';
 import { REQUEST, SUCCESS, FAILURE } from '../constants';
 
 export default (store) => (next) => async (action) => {
@@ -12,5 +13,6 @@ export default (store) => (next) => async (action) => {
     next({ ...rest, type: type + SUCCESS, data });
   } catch (error) {
     next({ ...rest, type: type + FAILURE, error });
+    next(replace('/error'));
   }
 };
