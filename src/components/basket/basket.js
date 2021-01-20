@@ -35,7 +35,7 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         {orderProducts.map(({ product, amount, subtotal, restaurantId }) => (
           <CSSTransition
             key={product.id}
-            timeout={10000}
+            timeout={300}
             classNames="basket-animation"
           >
             <BasketItem
