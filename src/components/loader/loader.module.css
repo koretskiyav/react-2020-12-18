@@ -7,10 +7,12 @@
 
 .bounce1,
 .bounce2 {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: var(--green);
+  background-color: var(--white);
+  border: 4px solid var(--orange);
   opacity: 0.9;
   position: absolute;
   top: 0;

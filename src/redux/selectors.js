@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { getById } from './utils';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
-const orderSelector = (state) => state.order;
+const orderSelector = (state) => state.order.entities;
 const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
@@ -59,6 +59,14 @@ export const orderProductsSelector = createSelector(
         subtotal: order[product.id] * product.price,
         restaurantId: restaurantsIds[product.id],
       }))
+);
+
+export const orderSendingSelector = (state) => state.order.sending;
+export const orderErrorSelector = (state) => state.order.error;
+
+export const orderListSelector = createSelector(
+  orderSelector,
+  order => Object.entries(order).map(([id, amount]) => ({ id, amount }))
 );
 
 export const totalSelector = createSelector(
