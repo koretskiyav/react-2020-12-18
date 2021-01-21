@@ -7,10 +7,17 @@ import styles from './product.module.css';
 import { decrement, increment } from '../../redux/actions';
 
 import Button from '../button';
-import { productAmountSelector, productSelector } from '../../redux/selectors';
+import {
+  productAmountSelector,
+  productSelector,
+  activeCurrencySelector,
+} from '../../redux/selectors';
 
-const Product = ({ product, amount, increment, decrement }) => {
+const Product = ({ product, amount, increment, decrement, currency }) => {
   if (!product) return null;
+  const activeCurrency = currency;
+  const [currencyName, currencyValue] = Object.entries(activeCurrency)[0];
+  const price = Math.round(currencyValue * product.price);
 
   return (
     <div className={styles.product} data-id="product">
@@ -18,7 +25,9 @@ const Product = ({ product, amount, increment, decrement }) => {
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>
+            {price} {currencyName}
+          </div>
         </div>
         <div>
           <div className={styles.counter}>
@@ -51,6 +60,7 @@ Product.propTypes = {
 const mapStateToProps = createStructuredSelector({
   amount: productAmountSelector,
   product: productSelector,
+  currency: activeCurrencySelector,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

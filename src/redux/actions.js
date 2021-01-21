@@ -7,6 +7,12 @@ import {
   LOAD_REVIEWS,
   LOAD_PRODUCTS,
   LOAD_USERS,
+  CHECKOUT_PRODUCTS,
+  REQUEST,
+  SUCCESS,
+  FAILURE,
+  CLEAR_BASKET,
+  SET_CURRENCY,
 } from './constants';
 import {
   usersLoadingSelector,
@@ -14,10 +20,15 @@ import {
   reviewsLoadingSelector,
   reviewsLoadedSelector,
 } from './selectors';
-
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
 export const decrement = (id) => ({ type: DECREMENT, payload: { id } });
 export const remove = (id) => ({ type: REMOVE, payload: { id } });
+export const clearBasket = () => ({ type: CLEAR_BASKET });
+
+export const setCurrency = (currencyName) => ({
+  type: SET_CURRENCY,
+  payload: currencyName,
+});
 
 export const addReview = (review, restaurantId) => ({
   type: ADD_REVIEW,
@@ -62,4 +73,26 @@ export const loadUsers = () => async (dispatch, getState) => {
   if (loading || loaded) return;
 
   dispatch(_loadUsers());
+};
+
+export const checkoutProducts = (basketItems) => async (dispatch) => {
+  const itemsArr = basketItems.map((basketItem) => {
+    return { id: basketItem.product.id, amount: basketItem.amount };
+  });
+
+  dispatch({ type: CHECKOUT_PRODUCTS + REQUEST });
+
+  const request = await fetch('/api/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify([...itemsArr]),
+  });
+  const response = await request.json();
+  if (response !== 'ok') {
+    dispatch({ type: CHECKOUT_PRODUCTS + FAILURE, payload: response });
+  } else {
+    dispatch({ type: CHECKOUT_PRODUCTS + SUCCESS, payload: response });
+  }
 };

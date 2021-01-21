@@ -1,21 +1,46 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import './basket.css';
 import styles from './basket.module.css';
-
+import Loader from '../loader';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import {
+  activeCurrencySelector,
+  orderProductsSelector,
+  totalSelector,
+} from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user-context';
+import { checkoutProducts } from '../../redux/actions';
 
 function Basket({ title = 'Basket', total, orderProducts }) {
-  // const { name } = useContext(userContext);
+  const activeCurrency = useSelector(activeCurrencySelector);
+  const [currencyName, currencyValue] = Object.entries(activeCurrency)[0];
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const checkOutState = useSelector((state) => state.checkout);
 
+  const onCheckoutClickHandler = () => {
+    if (history.location.pathname === '/checkout') {
+      dispatch(checkoutProducts(orderProducts));
+    }
+  };
+  if (checkOutState.loading) {
+    return <Loader />;
+  }
+  if (checkOutState.loaded) {
+    history.push('/checkout/success');
+    //return <Redirect to='/checkout/success' />
+  }
+  if (checkOutState.error) {
+    history.replace('/checkout/error');
+    // return <Redirect to='/checkout/error' />
+  }
   if (!total) {
     return (
       <div className={styles.basket}>
@@ -23,7 +48,7 @@ function Basket({ title = 'Basket', total, orderProducts }) {
       </div>
     );
   }
-
+  const totalprice = Math.round(total * currencyValue);
   return (
     <div className={styles.basket}>
       {/* <h4 className={styles.title}>{`${name}'s ${title}`}</h4> */}
@@ -52,11 +77,11 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>Total</p>
         </div>
         <div className={itemStyles.info}>
-          <p>{`${total} $`}</p>
+          <p>{`${totalprice} ${currencyName}`}</p>
         </div>
       </div>
       <Link to="/checkout">
-        <Button primary block>
+        <Button onClick={onCheckoutClickHandler} primary block>
           checkout
         </Button>
       </Link>

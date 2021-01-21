@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Restaurants from '../components/restaurants';

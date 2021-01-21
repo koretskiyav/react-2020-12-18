@@ -13,3 +13,31 @@
   right: 20px;
   top: 0;
 }
+.currencySwitcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  color: var(--white);
+  right: 20px;
+  top: 0;
+}
+
+.currencySwitcher :hover {
+  color: gold;
+}
+
+.currencySwitcherActive {
+  color: gold;
+}
+.currencySwitcher h3 {
+  display: inline;
+  margin-left: 10px;
+}
+.currencyItem {
+  margin-right: 20px;
+}
+.currencyItemActive {
+  color: gold;
+  font-size: larger;
+}

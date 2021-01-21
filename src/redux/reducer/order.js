@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import { CLEAR_BASKET, DECREMENT, INCREMENT, REMOVE } from '../constants';
 
 // { [productId]: amount }
 export default (state = {}, action) => {
@@ -16,6 +16,8 @@ export default (state = {}, action) => {
         ...state,
         [payload.id]: 0,
       };
+    case CLEAR_BASKET:
+      return {};
     default:
       return state;
   }
