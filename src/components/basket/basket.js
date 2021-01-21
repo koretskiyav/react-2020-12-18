@@ -9,12 +9,11 @@ import styles from './basket.module.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import { CurrencyExchange } from '../currency';
-import { orderProductsSelector, totalSelector, orderSendingSelector } from '../../redux/selectors';
-import { postOrder } from '../../redux/actions';
+import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user-context';
 import CheckoutButton from './checkout-button';
 
-function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, match }) {
+function Basket({ title = 'Basket', total, orderProducts }) {
   // const { name } = useContext(userContext);
 
   if (!total) {
@@ -43,7 +42,6 @@ function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, ma
               amount={amount}
               subtotal={subtotal}
               restaurantId={restaurantId}
-              disable={sending}
             />
           </CSSTransition>
         ))}
@@ -59,7 +57,7 @@ function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, ma
           </p>
         </div>
       </div>
-      <CheckoutButton onClick={postOrder} disable={sending} />
+      <CheckoutButton />
     </div>
   );
 }
@@ -68,7 +66,5 @@ export default connect(
   createStructuredSelector({
     total: totalSelector,
     orderProducts: orderProductsSelector,
-    sending: orderSendingSelector,
-  }),
-  { postOrder }
+  })
 )(Basket);

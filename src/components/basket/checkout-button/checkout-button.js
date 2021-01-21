@@ -4,20 +4,23 @@ import { Link } from 'react-router-dom';
 import Button from '../../button';
 import Loader from '../../loader';
 
+import { postOrder } from '../../../redux/actions';
+import { orderSendingSelector } from '../../../redux/selectors';
+
 const CheckoutButton = ({
   pathname,
-  onClick,
-  disable
+  postOrder,
+  sending
 }) => {
 
-  if (disable) {
+  if (sending) {
     return <Button primary block disabled>
       <Loader />
     </Button>
   };
 
   if (pathname === "/checkout") {
-    return <Button primary block onClick={onClick}>
+    return <Button primary block onClick={postOrder}>
       checkout
     </Button>
   };
@@ -31,9 +34,10 @@ const CheckoutButton = ({
 };
 
 const mapStateToProps = state => ({
+  sending: orderSendingSelector(state),
   pathname: state.router.location.pathname,
   // search: state.router.location.search,
   // hash: state.router.location.hash,
 })
 
-export default connect(mapStateToProps)(CheckoutButton)
+export default connect(mapStateToProps, { postOrder })(CheckoutButton)
