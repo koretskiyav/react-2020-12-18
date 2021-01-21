@@ -4,3 +4,24 @@
   max-width: 884px;
   width: 100%;
 }
+
+.review-animation-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.review-animation-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1300ms, transform 1300ms;
+}
+
+.review-animation-exit {
+  opacity: 1;
+}
+
+.review-animation-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1300ms, transform 1300ms;
+}
