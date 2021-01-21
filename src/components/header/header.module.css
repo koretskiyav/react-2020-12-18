@@ -4,4 +4,12 @@
   justify-content: center;
   height: 60px;
   background: var(--black);
+  position: relative;
+}
+
+.header h2 {
+  position: absolute;
+  color: var(--white);
+  right: 20px;
+  top: 0;
 }
