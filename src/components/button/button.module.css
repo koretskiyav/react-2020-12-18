@@ -70,3 +70,11 @@
   padding: 11px 20px;
   height: 50px;
 }
+
+.button:disabled,
+.button:disabled:hover {
+  opacity: .5;
+  background-color: var(--grey-dark);
+  border: 1px solid var(--grey-dark);
+  cursor: wait;
+}

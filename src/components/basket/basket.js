@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -9,11 +8,11 @@ import styles from './basket.module.css';
 
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
-import Button from '../button';
 import { CurrencyExchange } from '../currency';
 import { orderProductsSelector, totalSelector, orderSendingSelector } from '../../redux/selectors';
 import { postOrder } from '../../redux/actions';
 import { UserConsumer } from '../../contexts/user-context';
+import CheckoutButton from './checkout-button';
 
 function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, match }) {
   // const { name } = useContext(userContext);
@@ -44,6 +43,7 @@ function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, ma
               amount={amount}
               subtotal={subtotal}
               restaurantId={restaurantId}
+              disable={sending}
             />
           </CSSTransition>
         ))}
@@ -59,19 +59,7 @@ function Basket({ title = 'Basket', total, orderProducts, postOrder, sending, ma
           </p>
         </div>
       </div>
-      {
-        (match && match.path === "/checkout")
-          ?
-          <Button primary block onClick={postOrder}>
-            checkoutButton
-          </Button>
-          :
-          <Link to="/checkout">
-            <Button primary block>
-              checkout
-            </Button>
-          </Link>
-      }
+      <CheckoutButton onClick={postOrder} disable={sending} />
     </div>
   );
 }
