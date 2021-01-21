@@ -13,6 +13,8 @@ import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user-context';
 
+import { CurrencyConsumer } from '../../contexts/currency-context';
+
 function Basket({ title = 'Basket', total, orderProducts }) {
   // const { name } = useContext(userContext);
 
@@ -34,7 +36,7 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         {orderProducts.map(({ product, amount, subtotal, restaurantId }) => (
           <CSSTransition
             key={product.id}
-            timeout={10000}
+            timeout={2000}
             classNames="basket-animation"
           >
             <BasketItem
@@ -52,7 +54,11 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>Total</p>
         </div>
         <div className={itemStyles.info}>
-          <p>{`${total} $`}</p>
+          <p>
+            <CurrencyConsumer>
+              {({ currency }) => `${total} ${currency}`}
+            </CurrencyConsumer>
+          </p>
         </div>
       </div>
       <Link to="/checkout">
