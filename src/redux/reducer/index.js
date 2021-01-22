@@ -7,6 +7,7 @@ import products from './products';
 import reviews from './reviews';
 import users from './users';
 import createOrder from './createOrder';
+import currency from './currency';
 
 import history from '../../history';
 
@@ -18,4 +19,5 @@ export default combineReducers({
   reviews,
   users,
   createOrder,
+  currency,
 });

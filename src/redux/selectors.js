@@ -8,6 +8,18 @@ const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
 const routerSelector = (state) => state.router;
 
+const currencySelector = (state) => state.currency;
+
+const currencyCourseSelector = createSelector(
+  currencySelector,
+  (currency) => currency.course
+);
+
+export const currencySignSelector = createSelector(
+  currencySelector,
+  (currency) => currency.sign
+);
+
 export const routerSelectorLocation = createSelector(
   routerSelector,
   (x) => x.location.pathname
@@ -58,14 +70,15 @@ export const orderProductsSelector = createSelector(
   productsSelector,
   orderSelector,
   restaurantsIdsByProductsSelector,
-  (products, order, restaurantsIds) =>
+  currencyCourseSelector,
+  (products, order, restaurantsIds, course) =>
     Object.keys(order)
       .filter((productId) => order[productId] > 0)
       .map((productId) => products[productId])
       .map((product) => ({
         product,
         amount: order[product.id],
-        subtotal: order[product.id] * product.price,
+        subtotal: order[product.id] * product.price * course,
         restaurantId: restaurantsIds[product.id],
       }))
 );
