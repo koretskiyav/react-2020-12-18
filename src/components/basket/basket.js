@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -10,11 +10,49 @@ import styles from './basket.module.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import {
+  orderProductsSelector,
+  totalSelector,
+  locationSelector,
+  orderLoadingSelector,
+  errorOrderSelector,
+  successOrderSelector,
+} from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user-context';
+import { takeOrder } from '../../redux/actions';
+import LoadBanner from '../loadBanner';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({
+  title = 'Basket',
+  total,
+  orderProducts,
+  loading,
+  location,
+  history,
+  takeOrder,
+  errorOrder,
+  successOrderMessage,
+}) {
   // const { name } = useContext(userContext);
+  const canTakeOrder = useMemo(() => {
+    return location.pathname === '/checkout';
+  }, [location]);
+
+  function onBtnHandler() {
+    if (canTakeOrder) {
+      takeOrder();
+    } else {
+      history.push('/checkout');
+    }
+  }
+
+  if (successOrderMessage) {
+    return (
+      <div className={styles.basket}>
+        <h4 className={styles.title}>{successOrderMessage}</h4>
+      </div>
+    );
+  }
 
   if (!total) {
     return (
@@ -26,7 +64,7 @@ function Basket({ title = 'Basket', total, orderProducts }) {
 
   return (
     <div className={styles.basket}>
-      {/* <h4 className={styles.title}>{`${name}'s ${title}`}</h4> */}
+      {loading && <LoadBanner />}
       <h4 className={styles.title}>
         <UserConsumer>{({ name }) => `${name}'s ${title}`}</UserConsumer>
       </h4>
@@ -55,11 +93,10 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>{`${total} $`}</p>
         </div>
       </div>
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
-        </Button>
-      </Link>
+      <div>{errorOrder}</div>
+      <Button primary block onClick={onBtnHandler}>
+        checkout
+      </Button>
     </div>
   );
 }
@@ -67,6 +104,10 @@ function Basket({ title = 'Basket', total, orderProducts }) {
 const mapStateToProps = createStructuredSelector({
   total: totalSelector,
   orderProducts: orderProductsSelector,
+  location: locationSelector,
+  loading: orderLoadingSelector,
+  errorOrder: errorOrderSelector,
+  successOrderMessage: successOrderSelector,
 });
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps, { takeOrder })(withRouter(Basket));

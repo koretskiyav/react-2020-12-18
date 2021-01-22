@@ -13,7 +13,7 @@ const App = () => {
       <UserProvider value={{ name, setName }}>
         <Header />
         <Switch>
-          <Route path="/checkout" component={Basket} />
+          <Route path="/checkout" exact component={Basket} />
           <Route path="/restaurants" component={RestaurantsPage} />
           <Route path="/error" component={() => <h1>Error Page</h1>} />
           <Redirect exact from="/" to={`/restaurants/`} />

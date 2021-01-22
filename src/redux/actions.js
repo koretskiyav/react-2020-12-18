@@ -7,12 +7,18 @@ import {
   LOAD_REVIEWS,
   LOAD_PRODUCTS,
   LOAD_USERS,
+  ORDER_SUCCESS,
+  ORDER_ERROR,
+  ORDER_LOADING_TOGGLE,
+  CLEAN_OUT,
 } from './constants';
+import products from './reducer/products';
 import {
   usersLoadingSelector,
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  orderSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -63,3 +69,47 @@ export const loadUsers = () => async (dispatch, getState) => {
 
   dispatch(_loadUsers());
 };
+
+export const takeOrder = () => async (dispatch, getState) => {
+  const state = orderSelector(getState());
+  const order = Object.keys(state).map((productId) => {
+    return { id: productId, amount: state[productId] };
+  });
+
+  dispatch(orderLoading(true));
+
+  await fetch('/api/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      dispatch(orderLoading(false));
+      if (res === 'ok') {
+        dispatch(orderSuccess());
+
+        return;
+      }
+
+      dispatch(orderError(res));
+    })
+    .catch(dispatch(orderError));
+};
+
+const orderSuccess = () => ({
+  type: CLEAN_OUT,
+  payload: {},
+});
+
+const orderLoading = (isLoad) => ({
+  type: ORDER_LOADING_TOGGLE,
+  payload: { loading: isLoad },
+});
+
+const orderError = (error) => ({
+  type: ORDER_ERROR,
+  payload: { error },
+});

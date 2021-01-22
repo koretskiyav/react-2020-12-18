@@ -1,20 +1,65 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import {
+  DECREMENT,
+  INCREMENT,
+  REMOVE,
+  ORDER_LOADING_TOGGLE,
+  ORDER_ERROR,
+  CLEAN_OUT,
+} from '../constants';
 
 // { [productId]: amount }
-export default (state = {}, action) => {
-  const { type, payload } = action;
+
+const initialState = {
+  entities: {},
+  loading: false,
+  error: null,
+  success: null,
+  // payload: 0,
+};
+
+export default (state = initialState, action) => {
+  const { type, payload, loading } = action;
   switch (type) {
     case INCREMENT:
-      return { ...state, [payload.id]: (state[payload.id] || 0) + 1 };
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          [payload.id]: (state.entities[payload.id] || 0) + 1,
+        },
+      };
     case DECREMENT:
       return {
         ...state,
-        [payload.id]: Math.max((state[payload.id] || 0) - 1, 0),
+        entities: {
+          ...state.entities,
+          [payload.id]: Math.max((state.entities[payload.id] || 0) - 1, 0),
+        },
       };
     case REMOVE:
       return {
         ...state,
-        [payload.id]: 0,
+        entities: {
+          ...state.entities,
+          [payload.id]: 0,
+        },
+      };
+    case ORDER_LOADING_TOGGLE:
+      return {
+        ...state,
+        loading: payload.loading,
+      };
+    case ORDER_ERROR:
+      return {
+        ...state,
+        error: payload.error,
+      };
+    case CLEAN_OUT:
+      return {
+        ...state,
+        entities: {},
+        success: 'Заказ сформирован',
+        error: null,
       };
     default:
       return state;

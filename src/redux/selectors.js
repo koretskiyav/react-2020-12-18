@@ -2,10 +2,20 @@ import { createSelector } from 'reselect';
 import { getById } from './utils';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
-const orderSelector = (state) => state.order;
+export const orderSelector = (state) => state.order.entities;
 const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
+const historyRouterSelector = (state) => state.router;
+
+export const orderLoadingSelector = (state) => state.order.loading;
+export const errorOrderSelector = (state) => state.order.error;
+export const successOrderSelector = (state) => state.order.success;
+
+export const locationSelector = createSelector(
+  historyRouterSelector,
+  (history) => history.location
+);
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
