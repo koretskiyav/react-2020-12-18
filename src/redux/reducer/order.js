@@ -1,9 +1,18 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import {
+  CREATE_ORDER,
+  DECREMENT,
+  INCREMENT,
+  REMOVE,
+  SUCCESS,
+} from '../constants';
 
-// { [productId]: amount }
-export default (state = {}, action) => {
+const initState = {};
+export default (state = initState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case CREATE_ORDER + SUCCESS: {
+      return initState;
+    }
     case INCREMENT:
       return { ...state, [payload.id]: (state[payload.id] || 0) + 1 };
     case DECREMENT:
@@ -16,6 +25,7 @@ export default (state = {}, action) => {
         ...state,
         [payload.id]: 0,
       };
+
     default:
       return state;
   }

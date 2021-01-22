@@ -50,7 +50,7 @@
 
 # HT6
 
-1. Сделать reviews/menu отдельными роутами (/restaurants/:id/reviews)
+1. Сделать reviews/menu отдельными роутами (/restaurant/:id/reviews)
 2. В корзине сделать продукты линками на их ресторан
 
 ## HT7

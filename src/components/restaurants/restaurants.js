@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Tabs from '../tabs';
 import Restaurant from '../restaurant';
 import { restaurantsListSelector } from '../../redux/selectors';
+import { Link } from 'react-router-dom';
 
 const Restaurants = ({ restaurants, match }) => {
   const { restId } = match.params;

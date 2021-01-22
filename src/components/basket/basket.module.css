@@ -27,3 +27,10 @@
     padding: 20px 24px;
   }
 }
+
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}

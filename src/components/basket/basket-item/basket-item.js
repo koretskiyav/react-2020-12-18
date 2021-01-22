@@ -5,6 +5,12 @@ import cn from 'classnames';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
+import {
+  currencySignSelector,
+  productAmountSelector,
+  productSelector,
+} from '../../../redux/selectors';
+import { createStructuredSelector } from 'reselect';
 
 function BasketItem({
   product,
@@ -14,6 +20,7 @@ function BasketItem({
   increment,
   decrement,
   remove,
+  sign,
 }) {
   return (
     <div className={styles.basketItem}>
@@ -28,7 +35,9 @@ function BasketItem({
           <span className={styles.count}>{amount}</span>
           <Button onClick={increment} icon="plus" secondary small />
         </div>
-        <p className={cn(styles.count, styles.price)}>{subtotal} $</p>
+        <p className={cn(styles.count, styles.price)}>
+          {subtotal} {sign}
+        </p>
         <Button onClick={remove} icon="delete" secondary small />
       </div>
     </div>
@@ -41,4 +50,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   remove: () => dispatch(remove(ownProps.product.id)),
 });
 
-export default connect(null, mapDispatchToProps)(BasketItem);
+const mapStateToProps = createStructuredSelector({
+  sign: currencySignSelector,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasketItem);
