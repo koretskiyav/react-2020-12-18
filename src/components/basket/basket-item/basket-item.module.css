@@ -58,7 +58,6 @@
 
 .name > a {
   display: inline-block;
-  text-decoration: none;
   color: var(--black);
 }
 
