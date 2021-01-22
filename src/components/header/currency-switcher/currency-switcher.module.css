@@ -1,0 +1,38 @@
+.switcher {
+  position: absolute;
+  right: 12px;
+  border: none;
+}
+
+.switcherBtn {
+  color: var(--white);
+  position: relative;
+  cursor: pointer;
+}
+
+.switcherBtn:not(:last-child) {
+  margin-right: 3px;
+}
+
+.switcherBtn:not(:last-child):after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: var(--grey);
+}
+
+.switcherBtn > input {
+  display: none;
+}
+
+.switcherBtn > input:checked ~ span {
+  color: var(--yellow);
+}
+
+.switcherBtn > span {
+  display: inline-block;
+  padding: 3px 6px;
+}
