@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import RestaurantsPage from '../../pages/restaurants-page';
 import Header from '../header';
 import Basket from '../basket';
+import ErrorPage from '../../pages/error-page';
 import { UserProvider } from '../../contexts/user-context';
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
         <Switch>
           <Route path="/checkout" component={Basket} />
           <Route path="/restaurants" component={RestaurantsPage} />
-          <Route path="/error" component={() => <h1>Error Page</h1>} />
+          <Route path="/error" component={ErrorPage} />
           <Route path="/" component={() => '404 - Not found'} />
         </Switch>
       </UserProvider>

@@ -10,12 +10,34 @@ import styles from './basket.module.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import {
+  createOrderLoadingSelector,
+  createOrderLoadedSelector,
+  orderProductsSelector,
+  routerSelectorLocation,
+  totalSelector,
+} from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user-context';
+import {
+  decrement,
+  increment,
+  createOrder,
+  loadReviews,
+} from '../../redux/actions';
+import Loader from '../loader';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({
+  title = 'Basket',
+  total,
+  orderProducts,
+  location,
+  createOrder,
+  loading,
+  loaded,
+}) {
   // const { name } = useContext(userContext);
 
+  const isCheckout = location === '/checkout';
   if (!total) {
     return (
       <div className={styles.basket}>
@@ -23,13 +45,14 @@ function Basket({ title = 'Basket', total, orderProducts }) {
       </div>
     );
   }
-
+  if (loading) return <Loader />;
   return (
     <div className={styles.basket}>
       {/* <h4 className={styles.title}>{`${name}'s ${title}`}</h4> */}
       <h4 className={styles.title}>
         <UserConsumer>{({ name }) => `${name}'s ${title}`}</UserConsumer>
       </h4>
+      <pre>{location}</pre>
       <TransitionGroup>
         {orderProducts.map(({ product, amount, subtotal, restaurantId }) => (
           <CSSTransition
@@ -55,11 +78,30 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>{`${total} $`}</p>
         </div>
       </div>
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
+
+      <div className={isCheckout ? styles.block : styles.none}>
+        <Button
+          onClick={() =>
+            createOrder(
+              orderProducts.map(({ product, amount }) => ({
+                id: product.id,
+                amount,
+              }))
+            )
+          }
+          primary
+          block
+        >
+          Checkout
         </Button>
-      </Link>
+      </div>
+      <div className={!isCheckout ? styles.block : styles.none}>
+        <Link to="/checkout">
+          <Button primary block>
+            checkout
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
@@ -67,6 +109,9 @@ function Basket({ title = 'Basket', total, orderProducts }) {
 const mapStateToProps = createStructuredSelector({
   total: totalSelector,
   orderProducts: orderProductsSelector,
+  location: routerSelectorLocation,
+  loading: createOrderLoadingSelector,
+  loaded: createOrderLoadedSelector,
 });
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps, { createOrder })(Basket);

@@ -7,6 +7,7 @@ import {
   LOAD_REVIEWS,
   LOAD_PRODUCTS,
   LOAD_USERS,
+  CREATE_ORDER,
 } from './constants';
 import {
   usersLoadingSelector,
@@ -44,7 +45,25 @@ const _loadReviews = (restaurantId) => ({
 
 const _loadUsers = () => ({ type: LOAD_USERS, CallAPI: '/api/users' });
 
+const _createOrder = (items) => ({
+  type: CREATE_ORDER,
+  CallAPI: '/api/order',
+  params: {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(items),
+  },
+});
+
+export const createOrder = (items) => async (dispatch, getState) => {
+  const state = getState();
+  dispatch(_createOrder(items));
+};
+
 export const loadReviews = (restaurantId) => async (dispatch, getState) => {
+  debugger;
   const state = getState();
   const loading = reviewsLoadingSelector(state, { restaurantId });
   const loaded = reviewsLoadedSelector(state, { restaurantId });
