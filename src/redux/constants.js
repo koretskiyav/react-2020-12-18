@@ -11,3 +11,7 @@ export const LOAD_USERS = 'LOAD_USERS';
 export const REQUEST = '_REQUEST';
 export const SUCCESS = '_SUCCESS';
 export const FAILURE = '_FAILURE';
+
+export const ORDER_ERROR = 'ORDER_ERROR';
+export const ORDER_LOADING_TOGGLE = 'ORDER_LOADING_TOGGLE';
+export const CLEAN_OUT = 'CLEAN_OUT';
