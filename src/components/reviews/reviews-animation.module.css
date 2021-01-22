@@ -1,0 +1,12 @@
+.enter {
+  opacity: 0;
+  transform: scaleY(0);
+  height: 0;
+}
+
+.enterActive {
+  opacity: 1;
+  height: 120px;
+  transform: scaleY(1);
+  transition: all 500ms ease-in;
+}

@@ -8,10 +8,6 @@
   transition: 0.2s all;
 }
 
-.review:last-child {
-  margin-bottom: 0;
-}
-
 .content {
   padding: 20px 26px;
   display: flex;
